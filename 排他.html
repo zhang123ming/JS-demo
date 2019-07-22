@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        li {
+            border: 1px solid #CCCCCC;
+            background: #f3f3f3;
+        }
+
+        .current {
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<script>
+    window.onload = function () {
+        var allLis = document.getElementsByTagName('li');
+        //     for (var i = 0; i < allLis.length; i++) {
+        //         if (i % 2 === 0) {
+        //             allLis[i].className = "current";
+        //         }
+        //     }
+        allLis[0].className = 'current';
+        var lastOne = 0;
+        for (var i = 0; i < allLis.length; i++) {
+            (function (index) {
+                allLis[index].onmouseover = function () {
+                    //清除鼠标滑过选中
+                    allLis[lastOne].className = "";
+                    this.className = "current";
+                    //   赋值操作
+                    lastOne = index;
+                }
+            })(i)
+        }
+
+
+        //
+        function text(y) {
+            return function (x) {
+                alert(x + y);
+            }
+        }
+
+        text(10)(20)
+    }
+</script>
+</body>
+</html>

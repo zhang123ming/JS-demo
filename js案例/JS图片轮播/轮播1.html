@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			.box {
+
+				width: 500px;
+				height: 200px;
+				margin: 100px auto;
+				border: 3px solid crimson;
+				position: relative;
+				overflow: hidden;
+				cursor: pointer;
+			}
+
+			.box .box-img {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				overflow: hidden;
+			}
+
+			.box .box-img .box-ul {
+				position: absolute;
+				width: 2500px;
+				height: 100%;
+
+			}
+
+			.box .box-img .box-ul li {
+				float: left;
+			}
+
+			.box .box-img .box-ul li img {
+				width: 500px;
+				height: 200px;
+			}
+
+			.box .box-btn {
+				display: none;
+				position: relative;
+			}
+
+			.box .box-btn .btn-left,
+			.box .box-btn .btn-right {
+				width: 30px;
+				height: 50px;
+				background: rgba(0, 0, 0, 0.5);
+				text-align: center;
+				line-height: 50px;
+				font-size: 30px;
+				color: #fff;
+				position: absolute;
+				margin-top: 75px;
+
+
+			}
+
+
+			.box .box-btn .btn-right {
+				right: 0;
+			}
+
+			.box .box-num {
+				position: absolute;
+				right: 20px;
+				bottom: 10px;
+			}
+
+			.box .box-num li {
+				width: 20px;
+				height: 20px;
+				border: 1px solid #333;
+				float: left;
+				margin-left: 2px;
+				background: #fff;
+				text-align: center;
+				line-height: 20px;
+
+			}
+
+			.box .box-num li.current {
+				background: orange;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="box-img">
+				<ul class="box-ul">
+					<li><img src="./images/1.jpg"></li>
+					<li><img src="./images/2.jpg"></li>
+					<li><img src="./images/3.jpg"></li>
+					<li><img src="./images/4.jpg"></li>
+					<li><img src="./images/5.jpg"></li>
+				</ul>
+			</div>
+			<div class="box-btn">
+				<div class="btn-left">&lt;</div>
+				<div class="btn-right">&gt;</div>
+			</div>
+			<ul class="box-num"></ul>
+		</div>
+		<script>
+			window.onload = function() {
+				function my$(cls) {
+					return document.getElementsByClassName(cls)[0];
+				}
+
+
+				// 获取指示符
+				var box_num = my$('box-num');
+				// 获取图片个数循环添加按钮
+				for (var i = 0; i < my$('box-ul').children.length; i++) {
+					var li = document.createElement("li");
+					li.innerHTML = (i + 1);
+					box_num.appendChild(li);
+				}
+				// 页面加载第一个指示符背景颜色改变
+				box_num.children[0].className = "current";
+				// 获取最外层div
+				var box = my$("box");
+				// 获取相框
+				var inner = box.children[0];
+				// 获取相框的宽度
+				var imgWidth = inner.offsetWidth;
+				// console.log(imgWidth)
+
+				// 获取相框内的ul
+				var ulObj = inner.children[0];
+				// ===================循环遍历所有的指示符标签 注册鼠标进入事件======================================
+				for (var j = 0; j < box_num.children.length; j++) {
+					// 循环的时候把索引值保存在每一个li标签中
+					box_num.children[j].setAttribute("index", j);
+					// =============鼠标移入=========================
+					box_num.children[j].onmouseover = function() {
+						// 移除所有的className
+						for (var k = 0; k < box_num.children.length; k++) {
+							box_num.children[k].className = "";
+						}
+						this.className = "current";
+						// 移动ul(每个图片的宽度*鼠标放在这个按钮的索引值)
+						var index = this.getAttribute("index"); //获取当前鼠标进入的索引
+						// console.log(-index*imgWidth)
+						animate(ulObj, -index * imgWidth);
+
+					}
+
+				}
+				// =================================左右按钮==========================================
+
+				var box_btn = my$("box-btn");
+				box.onmouseover = function() {
+					box_btn.style.display = "block";
+
+				}
+				box.onmouseout = function() {
+					box_btn.style.display = "none";
+
+				}
+
+
+				//设置任意的一个元素,移动到指定的目标位置
+				function animate(element, target) {
+					clearInterval(element.timeId);
+					//定时器的id值存储到对象的一个属性中
+					element.timeId = setInterval(function() {
+						//获取元素的当前的位置,数字类型
+						var current = element.offsetLeft;
+						//每次移动的距离
+						var step = 10;
+						step = current < target ? step : -step;
+						//当前移动到位置
+						current += step;
+						if (Math.abs(current - target) > Math.abs(step)) {
+							element.style.left = current + "px";
+						} else {
+							//清理定时器
+							clearInterval(element.timeId);
+							//直接到达目标
+							element.style.left = target + "px";
+						}
+					}, 10);
+				}
+
+			}
+		</script>
+	</body>
+</html>

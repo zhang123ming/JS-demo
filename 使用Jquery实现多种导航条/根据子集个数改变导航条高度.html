@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        li {
+            list-style: none
+        }
+
+        body {
+            background: #d9edf7;
+        }
+
+        .header {
+            width: 100%;
+            min-width: 1000px;
+            height: 70px;
+            background: #fff;
+            padding: 0px 30px;
+            box-sizing: border-box;
+            box-shadow: 0 3px 3px rgba(0,0,0,0.1);
+        }
+
+        .header .logo {
+            float: left;
+            margin-top: 10px;
+        }
+
+        .header .logo img {
+            height: 50px;
+        }
+
+        .header .nav {
+            float: right;
+        }
+
+        .header .nav li {
+            float: left;
+            position: relative;
+        }
+
+        .header .nav li > a {
+            color: #333;
+            display: block;
+            line-height: 70px;
+            padding: 0px 25px;
+        }
+
+        .header .nav .down {
+            position: absolute;
+            top: 70px;
+            left: 0;
+            padding-left: 25px;
+            padding-top: 10px;
+            display: none;
+            z-index: 5;
+        }
+
+        .header .nav .down a {
+            display: block;
+            line-height: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .header .hd_bg {
+            width: 100%;
+            position: absolute;
+            top: 70px;
+            height: 0px;
+            background: rgba(0, 204, 153, 0.5);
+            left: 0px;
+            z-index: 4;
+        }
+    </style>
+    <script src="jquery-2.1.1.min.js"></script>
+    <script>
+        $(function () {
+            // 注释：首先获取其高度然后在滑动li 下面的子元素   否则无效果
+            $(".header .nav li").hover(function () {
+                // 鼠标移入移出获得其元素高度 背景颜色高度随之改变
+                var h = $(this).find(".down").outerHeight();
+                $(".hd_bg").stop().animate({height: h});
+                // 鼠标移出li其子元素划上移出则滑下
+                $(this).find(".down").slideDown();
+            }, function () {
+                $(".hd_bg").stop().animate({height: 0});
+                $(this).find(".down").slideUp();
+
+
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="header">
+    <a href="#" class="logo"><img src="gif6.gif"></a>
+    <ul class="nav">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">职业课程</a>
+            <div class="down">
+                <a href="#">课程库</a>
+                <a href="#">知识体系</a>
+                <a href="#">职业路径图</a>
+                <a href="#">系列课程</a>
+            </div>
+        </li>
+        <li><a href="#">就业学习</a>
+            <div class="down">
+                <a href="#">课程库</a>
+                <a href="#">知识体系</a>
+                <a href="#">职业路径图</a>
+
+            </div>
+        </li>
+        <li><a href="#">极客社区</a>
+            <div class="down">
+                <a href="#">课程库</a>
+                <a href="#">知识体系</a>
+                <a href="#">职业路径图</a>
+                <a href="#">系列课程</a>
+                <a href="#">系列课程</a>
+            </div>
+        </li>
+        <li><a href="#">极客+</a>
+            <div class="down">
+                <a href="#">课程库</a>
+                <a href="#">知识体系</a>
+                <a href="#">职业路径</a>
+                <a href="#">系列课程</a>
+                <a href="#">系列课程</a>
+                <a href="#">系列课程</a>
+            </div>
+        </li>
+    </ul>
+    <div class="hd_bg"></div>
+</div>
+</body>
+</html>

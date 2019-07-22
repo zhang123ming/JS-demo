@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			.box {
+				position: absolute;
+				width: 300px;
+				height: 150px;
+				background: #006600;
+				cursor: move;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box"></div>
+		<script>
+			window.onload = function() {
+				var box = document.getElementsByClassName("box")[0];
+				box.onmousedown = function(e) {
+					var spaceX = e.clientX - box.offsetLeft;
+					var spaceY = e.clientY - box.offsetTop;
+					// console.log("space"+spaceX+"===="+spaceY)
+					document.onmousemove = function(e) {
+						var x = e.clientX - spaceX;
+						var y = e.clientY - spaceY;
+						box.style.left = x + "px";
+						box.style.top = y + "px";
+					}
+				}
+				document.onmouseup = function() {
+					document.onmousemove = null;
+				}
+			}
+		</script>
+	</body>
+</html>

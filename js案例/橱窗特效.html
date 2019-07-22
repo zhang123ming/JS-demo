@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border: none;
+        }
+
+        img {
+            width: 100px;
+            height: 150px;
+
+        }
+
+        #box {
+            width: 800px;
+            height: 200px;
+            border: 1px solid #ddd;
+            position: relative;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+
+        #box ul {
+            width: 2440px;
+            position: absolute;
+            left: 0;
+            top: 15px;
+        }
+
+        #box ul li {
+            float: left;
+            border: 3px solid #f3f3f3;
+            border-radius: 5px;
+        }
+
+        #box_bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: #e8e8e8;
+            height: 25px;
+            width: 100%;
+        }
+
+        .mask {
+            position: absolute;
+            left: 0;
+            top: 0;
+            /*width: 50px;*/
+            height: 25px;
+            background: orangered;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul id="box_top">
+        <li><img src="../js案例/九宫格/1.jpg"></li>
+        <li><img src="../js案例/九宫格/2.jpg"></li>
+        <li><img src="../js案例/九宫格/3.jpg"></li>
+        <li><img src="../js案例/九宫格/4.jpg"></li>
+        <li><img src="../js案例/九宫格/5.jpg"></li>
+        <li><img src="../js案例/九宫格/6.jpg"></li>
+        <li><img src="../js案例/九宫格/7.jpg"></li>
+        <li><img src="../js案例/九宫格/8.jpg"></li>
+        <li><img src="../js案例/九宫格/9.jpg"></li>
+        <li><img src="../js案例/九宫格/10.jpg"></li>
+        <li><img src="../js案例/九宫格/11.jpg"></li>
+        <li><img src="../js案例/九宫格/12.jpg"></li>
+        <li><img src="../js案例/九宫格/1.jpg"></li>
+        <li><img src="../js案例/九宫格/2.jpg"></li>
+        <li><img src="../js案例/九宫格/3.jpg"></li>
+        <li><img src="../js案例/九宫格/4.jpg"></li>
+        <li><img src="../js案例/九宫格/5.jpg"></li>
+        <li><img src="../js案例/九宫格/6.jpg"></li>
+        <li><img src="../js案例/九宫格/7.jpg"></li>
+        <li><img src="../js案例/九宫格/8.jpg"></li>
+        <li><img src="../js案例/九宫格/9.jpg"></li>
+        <li><img src="../js案例/九宫格/10.jpg"></li>
+        <li><img src="../js案例/九宫格/11.jpg"></li>
+        <li><img src="../js案例/九宫格/12.jpg"></li>
+    </ul>
+    <div id="box_bottom">
+        <span class="mask"></span>
+    </div>
+</div>
+<script>
+    window.onload = function () {
+        //获取需要的标签
+        var box = document.getElementById("box");
+        var box_top = document.getElementById("box_top");
+        var box_bottom = document.getElementById("box_bottom");
+        var mask = box_bottom.children[0];
+        //    设置滚动条的长度
+        //    滚动条的长度=（盒子的宽度、内容的宽度）*盒子的宽度
+
+        var mask_len = (box.offsetWidth / box_top.offsetWidth) * box.offsetWidth;
+        //动态添加进度条的长度
+        mask.style.width = mask_len + 'px';
+
+        //    鼠标的操作
+        mask.onmousedown = function (event) {
+            var e = event || window.event;
+            //    求出初始值
+            var beginX = event.clientX - mask.offsetLeft;
+            //    移动
+            document.onmousemove = function (event) {
+                var e = event || window.event;
+                //求出移动的距离
+                var endX = event.clientX - beginX;
+                //处理边界值
+                if (endX < 0) {
+                    endX = 0;
+                } else if (endX >= box.offsetWidth - mask.offsetWidth) {
+                    endX = box.offsetWidth - mask.offsetWidth;
+                }
+                //    动起来
+                mask.style.left = endX + 'px';
+
+                //内容的距离=（内容的长度-盒子的长度）/（盒子的长度-滚动条的长度）*滚动条走的距离
+                var content = (box_top.offsetWidth - box.offsetWidth) / (box.offsetWidth - mask.offsetWidth) * endX;
+                box_top.style.left = -content + 'px';
+                return false;
+            };
+            document.onmouseup = function () {
+                document.onmousemove = null;
+            }
+        };
+
+    }
+</script>
+</body>
+</html>

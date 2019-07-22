@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			.box {
+				width: 1000px;
+				height: 330px;
+				border: 3px solid #F5F5DC;
+				margin: 100px auto;
+				overflow: hidden;
+			}
+
+			.box ul li {
+				width: 200px;
+				height: 330px;
+				float: left;
+			
+			}
+
+			
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<ul class="ul"></ul>
+		</div>
+		
+		<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+		<script>
+			$(function() {
+				for (var i = 0; i < 5; i++) {
+					$(".ul").append($("<li></li>"));
+				   $("li").eq(i).css("backgroundImage", "url(images/" + (i + 1) + ".jpg)");
+				}
+				$("li").mouseenter(function(){
+					$(this).stop().animate({width:"800px"}).siblings().stop().animate({width:"50px"});
+				})
+$("li").mouseleave(function(){
+					$("li").stop().animate({width:"200px"})
+				})
+			})
+		</script>
+	</body>
+</html>

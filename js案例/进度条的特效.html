@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border: none;
+        }
+
+        #progress {
+            width: 1000px;
+            height: 35px;
+            line-height: 35px;
+            /*background: #e8e8e8;*/
+            margin: 100px auto;
+            position: relative;
+        }
+
+        #progress_bar {
+            width: 900px;
+            height: 100%;
+            background: #ccc;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        #progress_value {
+            position: absolute;
+            right: 30px;
+            top: 0;
+        }
+
+        #progress_fg {
+            width: 50px;
+            height: 100%;
+            background: orangered;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        span {
+            width: 25px;
+            height: 50px;
+            background-color: orangered;
+            position: absolute;
+            left: 49px;
+            top: -7px;
+            /*cursor: pointer;*/
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="progress">
+    <div id="progress_bar">
+        <div id="progress_fg"></div>
+        <span></span>
+    </div>
+    <div id="progress_value">10%</div>
+</div>
+
+<script>
+    window.onload = function () {
+        var progress = document.getElementById("progress");
+        var progress_bar = progress.children[0];
+        var progress_fg = progress_bar.children[0];
+        var mask = progress_bar.children[1];
+        var progress_value = progress.children[1];
+        //    监听鼠标按下
+        mask.onmousedown = function (event) {
+            var e = event || window.event;
+            //    获取初始值
+            var offsetLeft = event.clientX - mask.offsetLeft;
+
+            //    监听鼠标移动
+            document.onmousemove = function (event) {
+                var e = event || window.event;
+                //    获取移动的位置
+                var x = e.clientX - offsetLeft;
+
+                //处理边界值
+                if (x < 0) {
+                    x = 0;
+                } else if (x >= progress_bar.offsetWidth - mask.offsetWidth) {
+                    x = progress_bar.offsetWidth - mask.offsetWidth;
+                }
+                //    走起来
+                mask.style.left = x + 'px';
+                progress_fg.style.width = x + 'px';
+                progress_value.innerHTML = parseInt(x / (progress_bar.offsetWidth - mask.offsetWidth) * 100) + "%";
+                return false;
+            }
+            //    监听鼠标抬起
+            document.onmouseup = function () {
+                document.onmousemove = null;
+            }
+        }
+    }
+</script>
+</body>
+</html>

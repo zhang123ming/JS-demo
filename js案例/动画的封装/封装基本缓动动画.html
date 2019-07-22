@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            background: orangered;
+            position: absolute;
+        }
+
+
+    </style>
+</head>
+<body>
+<button id="btn">往右走</button>
+<button id="btnR">往左走</button>
+<div id="box"></div>
+<script src="../myScroll.js"></script>
+<script>
+    window.onload = function () {
+        //监听按钮点击
+        var timer = null;
+        var target = 800;//运动的距离距离
+        var box = $('box');//得到盒子的
+        $('btn').onclick = function () {
+            buffer(box, 'left', target);
+        };
+        $('btnR').onclick = function () {
+            buffer(box, 'top', 100);
+        };
+
+        /**
+         * 函数封装
+         * 参数分别为 box， 目标长度
+         * */
+        function buffer(obj, attr, target) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                //获取初始值
+                var begin = parseInt(getCssAttrValue(obj, attr));
+                console.log(begin);
+                //求出步长
+                var speed = (target - begin) * 0.2;
+                //向上取整
+                //判断是向左还是向右运动
+                speed = (target > begin) ? Math.ceil(speed) : Math.floor(speed);
+                //    盒子动起来
+                obj.style[attr] = begin + speed + 'px';
+                box.innerHTML = obj.style.left;
+                //判断
+                if (begin === target) {
+                    clearInterval(obj.timer);
+                }
+            }, 20)
+        }
+    }
+</script>
+</body>
+</html>

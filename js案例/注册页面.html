@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			.box {
+				margin: 0 auto;
+				width: 500px;
+				border: 1px solid #F5F5DC;
+				margin-top: 20px;
+				margin-bottom: 20px;
+				padding: 30px;
+			}
+
+			.box #btn {
+				padding: 10px 20px;
+				margin-left: 150px;
+				margin-top: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<textarea rows="15" cols="60" class="text" style="resize: none;">
+				童年时的回忆太多了，有人回忆说坐在自行车的大梁上，麻过脚，夹过手，颠的屁股疼，别过脚后跟，......现在想起来，多想再让爸爸妈妈骑自行车带着我们兜几圈，那种美好只有到了我们这般年龄，方能深刻体会。可是再也回不去了，我们只有像电影《致我们终将逝去的青春》一样，致我们再也回不去的童年。
+				
+关于童年的记忆太多了，多的不
+			</textarea>
+			<input type="button" value="请仔细阅读协议(5)" id="btn" disabled="disabled">
+		</div>
+		<script>
+			window.onload = function() {
+				var btn = document.getElementById("btn");
+
+				var timer = 5;
+				var TimerID = setInterval(function() {
+					timer--;
+					btn.value = "请仔细阅读协议(" + timer + ")"
+					if (timer === 0) {
+						clearInterval(TimerID);
+						btn.disabled = false;
+						btn.style.background = "#006600"
+						btn.value = "同意";
+						btn.style.color = "#fff";
+
+					}
+
+
+				}, 1000)
+			}
+		</script>
+	</body>
+</html>

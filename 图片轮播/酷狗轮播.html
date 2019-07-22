@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #banner {
+            width: 1000px;
+            height: 300px;
+            background: url("../292646.jpg");
+            margin: 30px auto;
+            position: relative;
+            background-size: cover;
+        }
+
+        /*img {*/
+        /*opacity: .8;*/
+        /*}*/
+
+        #banner ul li {
+            list-style: none;
+            position: absolute;
+        }
+
+        #banner ul li img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .first {
+            width: 600px;
+            height: 200px;
+            /*距离参照物左端的距离*/
+            left: 200px;
+            /*距离参照物上端的距离*/
+            top: 48px;
+            z-index: 10;
+        }
+
+        .second {
+            width: 500px;
+            height: 175px;
+            /*left: 60px;*/
+            top: 60px;
+            z-index: 9;
+        }
+
+        .third {
+            width: 500px;
+            height: 175px;
+            left: 0;
+            top: 60px;
+            z-index: 8;
+        }
+
+        .four {
+            width: 500px;
+            height: 175px;
+            /*left: 300px;*/
+            top: 60px;
+            z-index: 7;
+        }
+
+        .five {
+            width: 500px;
+            height: 175px;
+            top: 60px;
+        }
+
+        .six {
+            left: 500px;
+        }
+
+        .seven {
+            left: 500px;
+        }
+
+        .last {
+            left: 500px;
+        }
+
+        .btn div {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 125px;
+            z-index: 20;
+            line-height: 50px;
+            text-align: center;
+            color: #00cc00;
+            background: rgba(0, 0, 0, .5);
+            font-size: 30px;
+        }
+
+        .btn .left {
+            left: 0;
+        }
+
+        .btn .right {
+            right: 0px;
+
+        }
+
+    </style>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="banner">
+    <ul>
+
+        <li class="first"><img src="img2.jpg"></li>
+        <li class="second"><img src="img3.jpg"></li>
+        <li class="third"><img src="img4.jpg"></li>
+        <li class="four"><img src="img6.jpg"></li>
+        <li class="five"><img src="img7.jpg"></li>
+        <li class="four six"><img src="img8.jpg"></li>
+        <li class="third seven"><img src="img4.jpg"></li>
+        <li class="second last"><img src="img6.jpg"></li>
+    </ul>
+    <div class="btn">
+        <div class="left"><span class="fa fa-arrow-left"></span></div>
+        <div class="right"><span class="fa fa-arrow-right"></span></div>
+    </div>
+</div>
+<script src="jquery-2.1.1.min.js"></script>
+<script>
+    //     $(function () {
+    //         var nowTime = new Date();//获取当前本地时间
+    //         //左按钮
+    //         $('.left').click(function () {
+    //             //当上一次动画执行完成了才能执行下一次
+    //             if (new Date() - nowTime >= 500) {
+    //                 nowTime = new Date();
+    //                 tab(true);
+    //             }
+    //         });
+    //         //右按钮
+    //         $('.right').click(function () {
+    //             if (new Date() - nowTime >= 500) {
+    //                 nowTime = new Date();
+    //                 tab(false);
+    //             }
+    //         });
+    //         //临时添加 存在bug
+    //         var tt = setInterval(function () {
+    //             if (new Date() - nowTime >= 500) {
+    //                 nowTime = new Date();
+    //                 tab(true);
+    //             }
+    //         }, 500);
+    //         $("img").hover(function () {
+    //             clearInterval(tt);
+    //         }, function () {
+    //             tt = setInterval(function () {
+    //                 if (new Date() - nowTime >= 500) {
+    //                     nowTime = new Date();
+    //                     tab(true);
+    //                 }
+    //             }, 500);
+    //         })
+    // //以上代码临时添加
+    //         //封装一个函数 自定义一个交换参数
+    //         function tab(dir) {//形参
+    //             //获取每一个li的宽高 left top z-index
+    //             var arrW = [], arrH = [], arrL = [], arrT = [], arrZ = [];
+    //             $("#banner ul li").each(function (i) {
+    //                 //console.log(i);//在控制台输出  每一个li 的索引
+    //                 arrW[i] = $(this).css("width");
+    //                 arrH[i] = $(this).css("height");
+    //                 arrL[i] = $(this).css("left");
+    //                 arrT[i] = $(this).css("top");
+    //                 arrZ[i] = $(this).css("z-index");
+    //             });
+    //             //依次的重新给每一个li赋值
+    //             $("#banner ul li").each(function (i) {
+    //                 var n;
+    //                 if (dir) {//点击左按钮
+    //                     n = i - 1;
+    //                     if (n < 0) {
+    //                         n = 7;
+    //                     }
+    //                 } else {//点击右按钮
+    //                     n = i + 1;
+    //                     if (n > 7) {
+    //                         n = 0;
+    //                     }
+    //                 }
+    //                 $(this).css("z-index", arrZ[n]);
+    //                 $(this).animate({
+    //                     "width": arrW[n],
+    //                     "height": arrH[n],
+    //                     "left": arrL[n],
+    //                     "top": arrT[n]
+    //                 }, 500);
+    //             });
+    //         }
+    //     })
+    //方案二
+    $(function () {
+        //左按钮
+        var move = true;
+        $('.left').click(function () {
+            if (move) {
+                move = false;
+                tab(true);
+            }
+        });
+        //右按钮
+        $('.right').click(function () {
+            if (move) {
+                move = false;
+                tab(false);
+            }
+        });
+        setInterval(function () {
+
+            if (move) {
+                move = false;
+                tab(true);
+            }
+        }, 3000);
+
+        //封装一个函数 自定义一个交换参数
+        function tab(dir) {//形参
+            //获取每一个li的宽高 left top z-index
+            var arrW = [], arrH = [], arrL = [], arrT = [], arrZ = [];
+            $("#banner ul li").each(function (i) {
+                //console.log(i);//在控制台输出  每一个li 的索引
+                arrW[i] = $(this).css("width");
+                arrH[i] = $(this).css("height");
+                arrL[i] = $(this).css("left");
+                arrT[i] = $(this).css("top");
+                arrZ[i] = $(this).css("z-index");
+            });
+            //依次的重新给每一个li赋值
+            $("#banner ul li").each(function (i) {
+                var n;
+                if (dir) {//点击左按钮
+                    n = i - 1;
+                    if (n < 0) {
+                        n = 7;
+                    }
+                } else {//点击右按钮
+                    n = i + 1;
+                    if (n > 7) {
+                        n = 0;
+                    }
+                }
+                $(this).css("z-index", arrZ[n]);
+                $(this).animate({
+                    "width": arrW[n],
+                    "height": arrH[n],
+                    "left": arrL[n],
+                    "top": arrT[n]
+                }, 300, function () {
+                    //当动画执行完成后在执行什么
+                    move = true;
+                });
+            });
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+    <title>无缝滚动</title>
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .img {
+            width: 1200px;
+            height: 200px;
+            border: 2px solid #0b2e13;
+            margin: 200px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img ul {
+            width: 1800px;
+        }
+
+        li {
+            list-style: none;
+            display: block;
+            float: left;
+        }
+
+        img {
+            width: 300px;
+            height: 200px;
+        }
+
+        .right, .left {
+            position: absolute;
+            height: 200px;
+            width: 50px;
+            text-align: center;
+            line-height: 200px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-weight: bolder;
+            font-size: 30px;
+        }
+
+        .left {
+            right: 0px;
+        }
+    </style>
+</head>
+<body>
+<div class="img">
+    <button class="left">></button>
+    <button class="right"><</button>
+    <ul>
+        <li><img src="img2.jpg"></li>
+        <li><img src="img3.jpg"></li>
+        <li><img src="img4.jpg"></li>
+        <li><img src="img6.jpg"></li>
+        <li><img src="img7.jpg"></li>
+        <li><img src="img8.jpg"></li>
+    </ul>
+    <div class="left">右</div>
+    <div class="right">左</div>
+</div>
+<script src="jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+    var tt = setInterval(run, 1000);
+    $(".img").hover(function () {
+        clearInterval(tt);
+    }, function () {
+        tt = setInterval(run, 1000);
+    });
+    $('.right').click(function () {
+        alert(1);
+    });
+
+    function run() {
+        $(".img ul").animate({marginLeft: "-300px"}, 500, function () {
+            $(this).css({marginLeft: "0px"}).find("li:first").appendTo(this);
+        })
+    }
+</script>
+</body>
+</html>

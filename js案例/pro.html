@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			.box {
+				width: 500px;
+				height: 50px;
+				border: 1px solid #333;
+				margin: 100px auto;
+				line-height: 50px;
+				text-align: center;
+			}
+
+			.box span {
+				background: #000000;
+				color: #fff;
+				font-weight: bold;
+				font-size: 20px;
+				padding: 5px 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<i>倒计时抢购:</i>
+			<span class="day"></span>天
+			<span class="hour"></span>小时
+			<span class="min"></span>分
+			<span class="sec"></span>秒
+		</div>
+		<script>
+			window.onload = function() {
+				setInterval(computedTime, 500)
+				function computedTime() {
+					let spanday = document.getElementsByClassName("day")[0];
+					let spanhour = document.getElementsByClassName("hour")[0];
+					let spanmin = document.getElementsByClassName("min")[0];
+					let spansec = document.getElementsByClassName("sec")[0];
+					let newdate = new Date();
+					let targetTime = new Date('2019/5/24 10:00');
+					// console.log(newdate+"====="+targetTime)
+					let spanTime = targetTime - newdate;
+					// console.log(spanTime)
+					var day = Math.floor(spanTime / 1000 / 60 / 60 / 24);
+					spanTime -= day * 24 * 60 * 60 * 1000
+					var hour = Math.floor(spanTime / 1000 / 60 / 60);
+					spanTime -= hour * 1000 * 60 * 60
+					var min = Math.floor(spanTime / 1000 / 60);
+					spanTime -= min * 1000 * 60
+					var sec = Math.floor(spanTime / 1000)
+					if (day < 10) {
+						day = '0' + day
+					}
+					if (hour < 10) {
+						hour = '0' + hour
+					}
+					if (min < 10) {
+						min = "0" + min
+					}
+					if (sec < 10) {
+						sec = "0" + sec
+					}
+					spanday.innerHTML = day;
+					spanhour.innerHTML = hour
+					spanmin.innerHTML = min;
+					spansec.innerHTML = sec;
+				}
+			}
+		</script>
+	</body>
+</html>

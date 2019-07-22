@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 150px;
+            height: 150px;
+            background-color: yellowgreen;
+            position: absolute;
+            left: 0;
+            top: 100px;
+        }
+    </style>
+</head>
+<body>
+<button id="btn">往右走</button>
+<div id="box"></div>
+<script src="../myScroll.js"></script>
+<script>
+    window.onload = function () {
+        $('btn').onmousedown = function () {
+            constent($('box'), 400, 20);
+
+        };
+
+
+        /**
+         * 匀速动画函数
+         *ele 元素
+         *target 目标值
+         *speed 步长
+         * */
+        function constent(ele, target, speed) {
+            //清除定时器
+            clearInterval(ele.timer);
+            //    设置定时器
+            ele.timer = setInterval(function () {
+                ele.style.left = ele.offsetLeft + speed + 'px';
+                if (ele.offsetLeft >= target) {
+                    clearInterval(ele.timer);
+                }
+
+            }, 20)
+
+        }
+
+    };
+
+
+</script>
+</body>
+</html>

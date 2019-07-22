@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<p >{{msg|msgFormat('----这是替换后的文字-----')}}</p>
+		</div>
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+		<script>
+			// 定义一个全局的过滤器
+			Vue.filter("msgFormat",function(msg,arg){
+			return	msg.replace("事物",arg)
+			})
+			var app = new Vue({
+				el: "#app",
+				data: {
+					msg: "每个人都向往着美好事物，当看到美丽的东西之后，总是忍不住要上去赞扬一番"
+				}
+			})
+		</script>
+	</body>
+</html>

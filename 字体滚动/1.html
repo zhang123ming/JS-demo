@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .box {
+            position: relative;
+            width: 300px;
+            height: 40px;
+            border: 2px solid #07dcec;
+            margin: 200px auto;
+            overflow: hidden;
+        }
+
+        .box ul li {
+            height: 40px;
+            line-height: 40px;
+            /*border: 1px solid #2b70ed;*/
+            list-style: none;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul class="ul">
+        <li>这是第一个li标签</li>
+        <li>这是第二个li标签</li>
+        <li>这是第三个li标签</li>
+        <li>这是第四个li标签</li>
+        <li>这是第⑤个li标签</li>
+        <li>这是第六个li标签</li>
+        <li>这是第七个li标签</li>
+    </ul>
+</div>
+<script src="jiaoben3022/js/jquery.min.js"></script>
+<script>
+    $(function () {
+        var tt = setInterval(run, 2000);
+        $(".box").hover(function () {
+            clearInterval(tt);
+        }, function () {
+            tt = setInterval(run, 2000);
+        })
+
+        function run() {
+	
+            $(".box ul").animate({marginTop: "-40px"}, 500, function () {
+                $(this).css({marginTop: "0px"}).find("li:first").appendTo(this);
+            });
+				
+        }
+    })
+</script>
+</body>
+</html>

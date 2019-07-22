@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 250px;
+            height: 300px;
+            background: orangered;
+            margin: 100px auto;
+            padding: 20px;
+        }
+
+        #box-top {
+            font-size: 23px;
+            color: #fff;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        #box-bottom {
+            width: 90%;
+            background: orange;
+            height: 70%;
+            margin: 0 auto;
+            font-size: 100px;
+            color: #fff;
+            /*主轴 侧轴居中*/
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="box-top"></div>
+    <div id="box-bottom"></div>
+</div>
+<script>
+    window.onload = function () {
+        //    创建日期对象
+        var date = new Date();
+        var y = date.getFullYear();
+        var m = date.getMonth();
+        var d = date.getDate();
+        var week = date.getDay();
+        var weeks = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        // weeks[week];//判断星期几
+        // console.log(weeks[week]);
+        //字符串拼接
+        $("box-top").innerHTML = y + "年" + m + "月" + d + "日" + " " + weeks[week];
+        $("box-bottom").innerHTML = d;
+
+        function $(id) {
+            return typeof id === "string" ? document.getElementById(id) : null;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box" style="text-shadow: 2px 2px 3px #0b2e13;color: #00cc00;font-weight: bolder"></div>
+<script src="../jquery-2.1.1.min.js"></script>
+<script>
+    var te = "我是显示文本内容";
+    textFont(te);
+
+    function textFont(te) {
+        var box = $("#box");
+        var i = 0;
+
+        setInterval(function () {
+            if (i == te.length) {
+                return;
+            }
+            box.text(box.text() + te[i])
+            i++;
+        }, 100)
+    }
+
+    // var str = "我是显示文本"
+    // fontDisplay(str);
+    // function fontDisplay(str) {
+    //     //获取代码中的id即可直接引用
+    //     var box = $("#box");
+    //     var index = 0;
+    //     setInterval(function () {
+    //         if (index == str.length) {
+    //             return;
+    //         }
+    //         box.text(box.text() + str[index]);
+    //         index++;
+    //     }, 100)
+    // }
+</script>
+</body>
+</html>

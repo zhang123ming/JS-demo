@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            background: orangered;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<button id="btn">往右走</button>
+<div id="box"></div>
+<script src="../myScroll.js"></script>
+<script>
+    window.onload = function () {
+        //监听按钮点击
+        var timer = null;
+        var target = 800;//运动的距离距离
+        var box = $('box');//得到盒子的
+        $('btn').onclick = function () {
+            clearInterval(timer);
+            timer = setInterval(function () {
+                //求出步长
+                var speed = (target - box.offsetLeft) * 0.2;
+                speed = Math.ceil(speed);//向上取整
+                // console.log(speed);
+                // console.log(speed);
+                //    盒子动起来
+                box.style.left = box.offsetLeft + speed + 'px';
+                // document.title = box.style.left;
+            //判断
+                if (box.offsetLeft===target){
+                    clearInterval(timer);
+                }
+            }, 20)
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+.title{
+	width: 100%;
+	height: auto;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(darkorchid), to(orchid));
+}
+			.box {
+				width: 500px;
+				height: auto;
+			margin: 100px auto;
+			}
+			.box h2{
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				text-align: center;
+			
+				}
+		.box .content{
+			width: 100%;
+			height: 50px;
+			text-align: center;
+			line-height: 50px;
+			padding-bottom: 20px;
+		}
+		.box .content input{
+			height: 25px;
+			width: 200px;
+		}
+			.box .content button{
+				height: 30px;
+				width: 100px;
+				background: crimson;
+				color: #fff;
+				font-weight: bold;
+				font-size: 16px;
+			}
+			.weater {
+				width: 100%;
+				height: auto;
+			}
+			.weater  li{
+				width: 50%;
+				height: 40px;
+				line-height: 40px;
+				padding-left: 30px;
+				box-sizing: border-box;
+				float: left;
+					background: -webkit-gradient(linear, 0 0, 0 100%, from(darkorchid), to(orchid));
+				
+			}
+			.weater  li:last-child{
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="title">
+				<h2>天气预报</h2>
+				<div class="content">
+					<input type="text" name="" id="input" value="" />
+					<button id="btn">查看天气</button>
+				</div>
+			</div>
+
+			<ul class="weater">
+			</ul>
+		</div>
+		<script src="https://cdn.bootcss.com/jquery/2.1.1-rc1/jquery.min.js"></script>
+		<script src="https://cdn.bootcss.com/template_js/0.7.1-1/template.min.js"></script>
+		<script>
+			$("#btn").click(function() {
+				$(".weater").children("li").remove();
+				var param = $("input").val();
+				if (param == "" || param.lengt === 0) {
+					param = "信阳";
+				}
+				$.ajax({
+					type: 'get',
+					url: 'http://api.jisuapi.com/weather/query',
+					data: {
+						appkey: "eee8cacbc1e612cd",
+						city: param
+					},
+					dataType: "jsonp",
+					jsonp: "callback",
+					success: function(json) {
+						console.log(json)
+						$(".weater").append(
+							`<li>地点:${json.result.city}</li>
+					<li>日期:${json.result.week}</li>
+					<li>编号:${json.result.citycode}</li>
+					<li>ID:${json.result.cityid}</li>
+					<li>天气:${json.result.weather}</li>
+					<li>日期:${json.result.date}</li>
+					<li>气压:${json.result.pressure}</li>
+					<li>温度:${json.result.temp}</li>
+					<li>湿度:${json.result.humidity}</li>
+					<li>最高温度:${json.result.temphigh}</li>
+					<li>最低温度:${json.result.templow}</li>
+					<li>风向:${json.result.winddirect}</li>
+					<li>风力:${json.result.windpower}</li>
+					<li>风速:${json.result.windspeed}</li>
+					<li>最后更新时间:${json.result.updatetime}</li>`
+						)
+					}
+				})
+				$("input").val("");
+			})
+		</script>
+	</body>
+</html>

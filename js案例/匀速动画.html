@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 90px;
+            height: 90px;
+            background: #00cc00;
+        }
+    </style>
+</head>
+<body>
+<button id="btn">开始动画</button>
+<div id="box"></div>
+<script>
+    window.onload = function () {
+//    获取需要的标签
+//         var btn = document.getElementById("btn");
+//         var box = document.getElementById("box");
+//         //定义变量
+//         var timer = null;
+//         var begin = 0;
+//         var step = 10;
+//         var target = (window.innerWidth-100);
+//         btn.onclick = function () {
+//             clearInterval(timer);
+//             //    设置定时器
+//             timer = setInterval(function () {
+//                 begin += step;
+//
+//                 //判断
+//                 if (begin >= target) {
+//                     clearInterval(timer);
+//                 }
+//                 ;
+//                 //    开始运动
+//                 box.style.marginLeft = begin + 'px';
+//             }, 10)
+//         }
+
+        // var target = (window.innerWidth - 100);
+
+        //调用动画
+        runAnimation("btn", "box", 10, 1000);
+
+        //    封装动画
+        function runAnimation(btnId, boxId, step, target) {
+            var btn = document.getElementById(btnId);
+            var box = document.getElementById(boxId);
+            //定义变量
+            var timer = null;
+            var begin = 0;
+            btn.onclick = function () {
+                clearInterval(timer);
+                //    设置定时器
+                timer = setInterval(function () {
+                    begin += step;
+
+                    //判断
+                    if (begin >= target) {
+                        clearInterval(timer);
+                    }
+                    ;
+                    //    开始运动
+                    box.style.marginLeft = begin + 'px';
+                }, 50)
+            }
+
+        }
+
+
+    }
+</script>
+</body>
+</html>

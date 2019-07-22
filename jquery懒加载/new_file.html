@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			.box {
+				width: 1200px;
+				height: auto;
+				margin: 0 auto;
+			}
+
+			li {
+				float: left;
+			}
+
+			img {
+				width: 300px;
+				height: 400px;
+			}
+		</style>
+	</head>
+	<body>
+		<div style="height: 1000px;"></div>
+		<ul class="box">
+			<li><img class="lazy" data-original="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1891656203,1819450897&fm=26&gp=0.jpg"></li>
+			<li><img class="lazy" data-original="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2497661267,1842808810&fm=26&gp=0.jpg"></li>
+			<li><img class="lazy" data-original="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2916917410,790682869&fm=26&gp=0.jpg"></li>
+			<li><img class="lazy" data-original="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2046190080,103263222&fm=26&gp=0.jpg"></li>
+			<li><img class="lazy" data-original="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2904824070,1938748805&fm=26&gp=0.jpg"></li>
+			<li><img class="lazy" data-original="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1379785797,3318847110&fm=26&gp=0.jpg"></li>
+			<li><img class="lazy" data-original="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3688122219,3215259958&fm=26&gp=0.jpg"></li>
+			<li><img class="lazy" data-original="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1599544198,1191796701&fm=26&gp=0.jpg"></li>
+			<li><img class="lazy" data-original="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1980227857,3110767858&fm=26&gp=0.jpg"></li>
+			<li><img class="lazy" data-original="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2464710278,3342111609&fm=26&gp=0.jpg"></li>
+			<li><img class="lazy" data-original="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3169054985,1310828345&fm=26&gp=0.jpg"></li>
+			<li><img class="lazy" data-original="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2595705084,3934017962&fm=26&gp=0.jpg"></li>
+		</ul>
+		<script src="jquery-1.12.4.js"></script>
+		<script src="jquery.lazyload.js"></script>
+		<script>
+			$(function() {
+				$("img.lazy").lazyload();
+				8
+			})
+		</script>
+	</body>
+</html>

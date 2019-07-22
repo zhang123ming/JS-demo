@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			.box {
+				width: 500px;
+				height: auto;
+				margin: 100px auto;
+			}
+
+			.comment li {
+				list-style: none;
+				background: #F5F5DC;
+				margin-top: 5px;
+				position: relative;
+			}
+
+			.comment li a {
+				text-decoration: none;
+				color: #333;
+				position: absolute;
+				right: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<h3>发表评论：</h3>
+			<textarea class="text" rows="10" cols="70" style="resize: none;"></textarea>
+			<br>
+			<button class="btn" style="margin-left: 450px;"> 提交</button>
+			<h3>留言区</h3>
+			<hr>
+			<ul class="comment">
+			
+			</ul>
+		</div>
+		<script>
+			window.onload = function() {
+				var btn = document.getElementsByClassName("btn")[0];
+				var text = document.getElementsByClassName("text")[0];
+				var comment = document.getElementsByClassName("comment")[0];
+				var as = comment.getElementsByTagName('a');
+				btn.onclick = function() {
+					if (text.value === "") {
+						alert("输入框的内容不能为空");
+						return;
+
+					}
+					var li = document.createElement("li");
+					li.innerHTML = text.value + new Date().toLocaleDateString() + "<a href='#'>删除</a>"
+					comment.appendChild(li);
+					text.value = "";
+					for (var i = 0; i < as.length; i++) {
+						var aon = as[i];
+						aon.onclick = function() {
+							this.parentNode.remove();
+						}
+					}
+				}
+
+
+
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <title>jQuery Mobile And Baidu Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link href="http://code.ybao.org/demo/src/map/Static/common/css/jquery.mobile-1.0a2.min.css" rel="stylesheet" type="text/css" />
+    <script src="http://code.ybao.org/demo/src/map/Static/common/js/jquery-1.4.4.min.js" type="text/javascript"></script>
+    <script src="http://code.ybao.org/demo/src/map/Static/common/js/Core.js" type="text/javascript"></script>
+    <script src="http://code.ybao.org/demo/src/map/Static/common/js/jquery.mobile-1.0a2.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?key=cfc4eebecf9df9fb52c6a3eebc98e877&v=1.1&services=true"></script>
+</head>
+<body>
+<!-- 主页面 -->
+<div data-role="page">
+    <div data-role="header">
+        <h1>百度地图API</h1>
+    </div>
+    <div data-role="content">
+        <div id="mapContainer">
+        </div>
+    </div>
+    <div data-role="footer" class="ui-bar">
+        <a href="#pageLocal" data-rel="dialog" data-role="button">本地搜索</a>
+        <a href="#pageTransit" data-rel="dialog" data-role="button">公交</a>
+        <a href="#pageDriving" data-rel="dialog" data-role="button">驾车</a>
+    </div>
+</div>
+<!-- 本地搜索 -->
+<div id="pageLocal" data-role="dialog">
+    <div data-role="header">
+        <h1>本地搜索</h1>
+    </div>
+    <div data-role="content">
+        <div>
+            <label for="txtSearchFor">
+                搜索地点:</label>
+            <input type="text" name="searchFor" id="txtSearchFor" value="中关村" />
+        </div>
+        <div>
+            <label for="txtSearchNearby">
+                在周围搜索:</label>
+            <input type="text" name="searchNearby" id="txtSearchNearby" value="小吃" />
+        </div>
+        <div>
+            <br />
+            <a id="btnSearchFor" data-role="button">搜索</a>
+        </div>
+    </div>
+</div>
+<!-- 公交 -->
+<div id="pageTransit" data-role="dialog">
+    <div data-role="header">
+        <h1>公交查询</h1>
+    </div>
+    <div data-role="content">
+        <div>
+            <label for="txtTransitStart">
+                起点:</label>
+            <input type="text" name="transitStart" id="txtTransitStart" value="北京站" />
+        </div>
+        <div>
+            <label for="txtTransitEnd">
+                终点:</label>
+            <input type="text" name="transitEnd" id="txtTransitEnd" value="前门" />
+        </div>
+        <div>
+            <br />
+            <a id="btnSearchTransit" data-role="button">搜索</a>
+        </div>
+    </div>
+</div>
+<!-- 驾车 -->
+<div id="pageDriving" data-role="dialog">
+    <div data-role="header">
+        <h1>驾车查询</h1>
+    </div>
+    <div data-role="content">
+        <div>
+            <label for="txtDrivingStart">
+                起点:</label>
+            <input type="text" name="drivingStart" id="txtDrivingStart" value="北京站" />
+        </div>
+        <div>
+            <label for="txtDrivingEnd">
+                终点:</label>
+            <input type="text" name="drivingEnd" id="txtDrivingEnd" value="前门" />
+        </div>
+        <div>
+            <br />
+            <a id="btnSearchDriving" data-role="button">搜索</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var ThisPage = {
+        initialize: function ()
+        {
+            this.resizeMap();
+            this.map = new BMap.Map("mapContainer");
+            var point = new BMap.Point(116.404, 39.915);
+            this.map.centerAndZoom(point, 14);
+
+            this.map.addControl(new BMap.NavigationControl());
+            this.map.addControl(new BMap.ScaleControl());
+        },
+
+        initializeEvent: function ()
+        {
+            $(window).resize(this.resizeMap.proxy(this));
+
+            //本地搜索
+            $("#btnSearchFor").click(function (e)
+            {
+                var searchFor = $("#txtSearchFor").val();
+                var searchNearby = $("#txtSearchNearby").val();
+
+                if (searchFor && !searchNearby)
+                {
+                    this.local = new window.BMap.LocalSearch(this.map, {
+                        renderOptions: { map: this.map }
+                    });
+                    this.map.clearOverlays();
+                    this.local.search(searchFor);
+                }
+                else (searchFor && searchNearby)
+                {
+                    this.local = new window.BMap.LocalSearch(this.map, {
+                        renderOptions: { map: this.map, autoViewport: false, selectFirstResult: false },
+                        pageCapacity: 1
+                    });
+                    this.map.clearOverlays();
+                    this.local.setSearchCompleteCallback(this.onSearchComplete.proxy(this));
+                    this.local.search(searchFor);
+                }
+            } .proxy(this));
+
+            //公交查询
+            $("#btnSearchTransit").click(function (e)
+            {
+                var transitStart = $("#txtTransitStart").val();
+                var transitEnd = $("#txtTransitEnd").val();
+
+                if (transitStart && transitEnd)
+                {
+                    var transit = new window.BMap.TransitRoute(this.map, {
+                        renderOptions: { map: this.map, autoViewport: true }
+                    });
+                    this.map.clearOverlays();
+                    transit.search(transitStart, transitEnd);
+                }
+            } .proxy(this));
+
+            //驾车查询
+            $("#btnSearchDriving").click(function (e)
+            {
+                var drivingStart = $("#txtDrivingStart").val();
+                var drivingEnd = $("#txtDrivingEnd").val();
+
+                if (drivingStart && drivingEnd)
+                {
+                    var driving = new window.BMap.DrivingRoute(this.map, {
+                        renderOptions: { map: this.map, autoViewport: true }
+                    });
+                    this.map.clearOverlays();
+                    driving.search(drivingStart, drivingEnd);
+                }
+            } .proxy(this));
+        },
+
+        resizeMap: function ()
+        {
+            $("#mapContainer").height($(window).height() - 120);
+            $("#mapContainer").width($(window).width() - 20);
+        },
+
+        onSearchComplete: function (results)
+        {
+            if (this.local.getStatus() == BMAP_STATUS_SUCCESS)
+            {
+                var count = results.getCurrentNumPois();
+                if (count > 0)
+                {
+                    var point = results.getPoi(0).point;
+                    this.map.centerAndZoom(point, 16);
+
+                    var local = new BMap.LocalSearch(this.map, {
+                        renderOptions: { map: this.map, selectFirstResult: false  },
+                        pageCapacity: 20
+                    });
+                    this.map.clearOverlays();
+                    local.searchInBounds($("#txtSearchNearby").val(), this.map.getBounds());
+                }
+            }
+        }
+    };
+
+    $(function ()
+    {
+        var thisPage = Class.create(ThisPage)
+    });
+</script>
+</body>
+</html>

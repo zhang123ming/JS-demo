@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            background: red;
+            margin-left: 100px;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<div style="height: 1000px"></div>
+<script>
+    var box = document.getElementById("box");
+    box.onmouseover = function (event) {
+        var e = event || window.event;
+        // box.offsetHeight 获取元素到顶部的高度
+        // alert(box.offsetLeft);
+        var x = event.clientX - box.offsetLeft;
+        var y = event.clientY - box.offsetHeight;
+        // console.log(x + "....." + y);
+        box.innerText = ("x:" + x + "-----" + "y:" + y);
+    }
+</script>
+</body>
+</html>

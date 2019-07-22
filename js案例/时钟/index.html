@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #box {
+            width: 380px;
+            height: 380px;
+            background: url("hour.png") no-repeat center center;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        #hour {
+            width: 22px;
+            height: 116px;
+            background: url("hh.png");
+            position: absolute;
+            left: 50%;
+            top: 100px;
+            /*top: 0;*/
+            margin-left: -5px;
+        }
+
+        #min {
+            width: 22px;
+            height: 116px;
+            background: url("ff.png") no-repeat center center;
+            position: absolute;
+            left: 50%;
+            top: 100px;
+            margin-left: -10px;
+        }
+
+        #second {
+            width: 22px;
+            height: 130px;
+            background: url("m.png") no-repeat center center;
+            position: absolute;
+            left: 50%;
+            top: 95px;
+            margin-left: -5px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="hour"></div>
+    <div id="min"></div>
+    <div id="second"></div>
+</div>
+<script>
+    window.onload = function () {
+        var hour = document.getElementById("hour");
+        var min = document.getElementById("min");
+        var second = document.getElementById("second");
+        //    开启定时器
+        setInterval(function () {
+            //获取当前的时间戳
+            var date = new Date();
+            //    求出总毫秒数
+            var mills = date.getMilliseconds();//宗浩明
+            var s = date.getSeconds() + mills / 1000;//秒
+            var m = date.getMinutes() + s / 60;//分钟
+            var h = date.getHours() % 12 + m / 60;//小时
+            hour.style.transform = 'rotate(' + h * 30 + 'deg)';
+            min.style.transform = 'rotate(' + m * 6 + 'deg)';
+            second.style.transform = 'rotate(' + s * 6 + 'deg)';
+        }, 10)
+    }
+</script>
+</body>
+</html>

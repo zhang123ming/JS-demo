@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 150px;
+            height: 150px;
+            background: orangered;
+            border: 5px solid #53b9be;
+        }
+
+
+    </style>
+</head>
+<body>
+<button id="btn">获取属性值</button>
+<div id="box"></div>
+<script src="../myScroll.js"></script>
+<script>
+    window.onload = function () {
+        var btn1 = $('btn');
+        var box = $('box');
+        btn1.onclick = function () {
+            console.log(getStyleAttr(box, 'width'));
+            console.log(getStyleAttr(box, 'height'));
+            console.log(getStyleAttr(box, 'background'));
+        };
+
+        /**
+         * 拿到属性值
+         * */
+        function getStyleAttr(obj, attr) {
+            if (obj.currentStyle) {//IE和opera
+                return obj.currentStyle[attr];
+            } else {
+                return window.getComputedStyle(obj, null)[attr];
+            }
+        }
+
+    }
+</script>
+</body>
+</html>

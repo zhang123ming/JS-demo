@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        img {
+            width: 250px;
+            height: 360px;
+        }
+
+        html, body, ul {
+            width: 100%;
+            height: 100%;
+        }
+
+        #ps {
+            position: relative;
+        }
+
+        #ps li {
+            width: 250px;
+            height: 360px;
+            box-shadow: 0 0 10px #000;
+            position: absolute;
+        }
+
+        #ps li.current {
+            left: 50% !important;
+            top: 50% !important;
+            transform: rotate(0deg) scale(1.3) translate(-50%, -30%) !important;
+            transition: all 1s;
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+<ul id="ps">
+
+</ul>
+<script src="Underscore.js"></script>
+<script>
+    window.onload = function () {
+        var ps = document.getElementById("ps");
+        //    动态创键li标签
+        for (var i = 0; i < 10; i++) {
+            var li = document.createElement("li");
+            ps.appendChild(li);
+            //    创建img标签
+            var img = document.createElement("img");
+            img.src = '../js案例/九宫格/' + (i + 1) + '.jpg';
+            li.appendChild(img);
+        }
+        //    获取所有的li
+        var allLi = ps.children;
+        //求出屏幕的高度和宽度
+        var w = document.documentElement.scrollWidth - 250;
+        var h = document.documentElement.scrollHeight - 360;
+        //    遍历
+        for (var j = 0; j < allLi.length; j++) {
+            //取出单个li
+            var li = allLi[j];
+            //    随机分布
+            li.style.left = _.random(0, w) + 'px';
+            li.style.top = _.random(0, h) + 'px';
+            //    随机角度
+            li.style.transform = 'rotate(' + _.random(0, 90) + 'deg)';
+
+            //    监听点击事件
+            li.onclick = function () {
+                for (var i = 0; i < allLi.length; i++) {
+                    allLi[i].className = '';
+                }
+                this.className = 'current';
+            }
+
+        }
+    }
+</script>
+</body>
+</html>

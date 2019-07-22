@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            height: 300px;
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+<img id="icon" src="../../index1.jpg">
+<p></p>
+<button id="prev">上一张</button>
+<button id="next">下一张</button>
+<script>
+    window.onload = function () {
+        //1、获取需要的标签
+        var icon = document.getElementById("icon");
+        var prev = document.getElementById("prev");
+        var next = document.getElementById("next");
+
+        //2、监听按钮点击事件
+        var maxIndex = 3, minIndex = 1;
+        var currentIndex = minIndex;
+        prev.onclick = function () {
+            if (currentIndex == minIndex) {
+                currentIndex = maxIndex;
+            } else {//正常情况
+                currentIndex--;
+            }
+            icon.setAttribute("src", "../index" + currentIndex + ".jpg");
+						console.log(2);
+        };
+        next.onclick = function () {
+			console.log(1);
+
+            if (currentIndex == maxIndex) {
+                currentIndex = minIndex;
+            } else {//正常情况
+                currentIndex++;
+            }
+            icon.setAttribute("src", "../index" + currentIndex + ".jpg");
+        };
+    }
+</script>
+</body>
+</html>

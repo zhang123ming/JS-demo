@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-size: 20px;
+        }
+
+        .box {
+            /*position: absolute;*/
+            width: 350px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border: 3px solid;
+            margin-left: 500px;
+            margin-top: 200px;
+            border-image: -webkit-linear-gradient(red, blue) 20 20;
+            background: linear-gradient(to right, red, blue);
+            -webkit-background-clip: text;
+            color: transparent;
+            font-weight: bolder;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .box span {
+            color: red;
+            font-weight: bold;
+        }
+
+        .run {
+            width: 800px;
+            height: 50px;
+            margin-top: 50px;
+            margin-left: 300px;
+            border: 1px solid #07dcec;
+        }
+    </style>
+</head>
+<body onload="computed()">
+<div class="box">Count Down：<span id="timeBox"></span></div>
+<div class="run"></div>
+<script>
+    var timeBox = document.getElementById('timeBox');
+
+    function computed() {
+        var nowTime = new Date();//当前时间
+        targetTime = new Date('2019/5/15 19:26:00');//目标时间
+        var spanTime = targetTime - nowTime;//获取的结果是两个时间的毫秒差
+        if (spanTime <= 0) {//到达抢购的时间
+            timeBox.innerHTML = "可以开始抢购"
+            //window.clearInterval(timer);//时间到了清除倒计时间
+            return;
+        }
+        //还没有到达抢购时间 在总毫秒差中计算还有多少小时 分钟 秒
+        var hour = Math.floor(spanTime / (1000 * 60 * 60));//计算还有多少个小时
+        spanTime -= hour * 60 * 60 * 1000;//把小时占据的毫秒去掉 剩下的值中计算还有多少分钟
+        var minute = Math.floor(spanTime / (1000 * 60));
+        spanTime -= minute * 60 * 1000;
+        var second = Math.floor(spanTime / 1000);
+        //不足十位 的补0
+        if (hour < 10) {
+            hour = '0' + hour;
+        }
+        if (minute < 10) {
+            minute = '0' + minute;
+        }
+        if (second < 10) {
+            second = '0' + second;
+        }
+        timeBox.innerHTML = hour + ":" + minute + ":" + second;
+
+    }
+
+    var timer = window.setInterval(computed, 1000);//计时重复执行
+    //computed();
+    //setInterval(computed, 500);
+</script>
+</body>
+</html>

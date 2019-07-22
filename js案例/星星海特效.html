@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Title</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			body {
+				background: #000;
+				overflow: hidden;
+			}
+
+			span {
+				width: 30px;
+				height: 30px;
+				background: url("xing.png") no-repeat;
+				position: absolute;
+				background-size: 100% 100%;
+				animation: flash 1s alternate infinite;
+			}
+
+			@keyframes flash {
+				0% {
+					opacity: 0;
+				}
+
+				100% {
+					opacity: 1;
+				}
+			}
+
+			span:hover {
+				transition: 0.5s;
+				transform: scale(2) rotate(180deg) !important;
+			}
+		</style>
+	</head>
+	<body>
+		<span></span>
+		<script>
+			//求出屏幕尺寸
+			var screenW = document.documentElement.clientWidth; //获取屏幕的宽度
+			var screenH = document.documentElement.clientHeight; //获取屏幕的高度
+			// var screenW = 300;
+			// var screenH = 300;
+			for (var i = 0; i < 150; i++) {
+				//创建星星  并添加进去
+				var span = document.createElement("span");
+				document.body.appendChild(span);
+				var w = 0;
+				//    随机坐标
+				w = parseInt(Math.random() * screenW);
+				var h = parseInt(Math.random() * screenH);
+				span.style.left = w + "px";
+				span.style.top = h + "px";
+				//    随机缩放大小
+				var scale = Math.random() * 1.5;
+				span.style.transform = 'scale(' + scale + '.' + scale + ')';
+				//控制播放频率
+				var rate = Math.random() * 1.5;
+				span.style.animationDelay = rate + "s";
+
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            margin-top: 100px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .box ul {
+            width: 1800px;
+        }
+
+        .box ul li {
+            width: 300px;
+            height: 5px;
+            float: left;
+            background: #dde683;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script src="jquery-2.1.1.min.js"></script>
+<script>
+    $(function () {
+        var bC1 = $(".box ul li:nth-child(1)");
+        var bC2 = $(".box ul li:nth-child(2)");
+        var bC3 = $(".box ul li:nth-child(3)");
+        var bC4 = $(".box ul li:nth-child(4)");
+        var bC5 = $(".box ul li:nth-child(5)");
+        var bC6 = $(".box ul li:nth-child(6)");
+        // var suiJi = Math.floor(Math.random() * (m - n) + n);
+        bC1.css("background", "#00a8e6");
+        bC2.css("background", "#41e61e");
+        bC3.css("background", "#e62237");
+        bC4.css("background", "#292fe6");
+        bC5.css("background", "#dde683");
+        bC6.css("background", "#2ee693");
+        var tt = setInterval(run,1);
+
+        function run() {
+            $(".box ul").animate({marginLeft: "-300px"}, 1000, function () {
+                $(this).css({marginLeft: "0px"}).find("li:first").appendTo(this);
+            })
+        }
+    })
+</script>
+</body>
+</html>

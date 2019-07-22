@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+        }
+
+        img {
+            vertical-align: top;
+        }
+
+        #close {
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            right: 2px;
+            top: 1px;
+            text-align: center;
+            line-height: 25px;
+            color: #c04fff;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <span id="close">X</span>
+    <div id="top"><img src="top.gif"></div>
+    <div id="bottom"><img src="bottom.gif"></div>
+</div>
+<script src="../myScroll.js"></script>
+<script>
+    window.onload = function () {
+//    获取需要的标签
+        var box = $('box');
+        var bottom = $('bottom');
+        var top = $('top');
+        var close = $('close');
+        //    监听点击事件
+        close.onclick = function () {
+            buffer(bottom, {"height": 0}, function () {
+                hide(close);
+                buffer(box, {"width": 0}, function () {
+                })
+            })
+        }
+
+    }
+</script>
+</body>
+</html>

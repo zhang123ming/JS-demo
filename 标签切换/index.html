@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script src="jquery-2.1.1.min.js"></script>
+    <script src="index.js"></script>
+    <style type="text/css">
+        ul, li {
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+
+        li {
+            float: left;
+            background-color: #696969;
+            padding: 5px;
+            margin-right: 2px;
+            border: 1px solid white;
+        }
+
+        .tabin {
+            background-color: #6e6e6e;
+            border: 1px solid #6e6e6e;
+        }
+
+        .contentfirst {
+            /*清除两次浮动*/
+            clear: both;
+            background-color: #6E6E6E;
+            color: white;
+            width: 200px;
+            height: 100px;
+            padding: 10px;
+            display: none;
+        }
+
+        .content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<ul id="tablefirst">
+    <li class="tabin">标签1</li>
+    <li>标签2</li>
+    <li>标签3</li>
+    <li>标签4</li>
+
+</ul>
+<div class="content contentfirst">
+    内容1
+</div>
+<div class="contentfirst">
+    内容2
+</div>
+<div class="contentfirst">
+    内容3
+</div>
+<div class="contentfirst">
+    内容4
+</div>
+</body>
+</html>

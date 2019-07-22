@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" id="text">
+		<button type="button" class="btn">提交</button>
+		<script>
+			window.onload = function() {
+				let val=''
+			
+				var text = document.getElementById("text");
+				var btn = document.getElementsByClassName("btn")[0];
+				btn.onclick = function() {
+					val= text.value;
+					localStorage.setItem('comArr', JSON.stringify(val))
+					console.log(val);
+					text.value = "";
+				}
+					text.value=JSON.parse(localStorage.getItem('comArr'))
+			}
+		</script>
+	</body>
+</html>

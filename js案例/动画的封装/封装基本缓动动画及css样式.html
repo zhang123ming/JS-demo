@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 150px;
+            height: 150px;
+            background: orangered;
+            position: absolute;
+        }
+
+
+    </style>
+</head>
+<body>
+<button id="btn">改变颜色</button>
+<button id="btnR">改变长度</button>
+<div id="box"></div>
+<script src="../myScroll.js"></script>
+<script>
+    window.onload = function () {
+        var btn1 = $('btn');
+        var btn2 = $('btnR');
+        var box = $('box');
+        btn1.onclick = function () {
+            changeCssStyle(box, 'background', 'green');
+        };
+        btn2.onclick = function () {
+            changeCssStyle(box, 'width', '500px');
+        };
+
+        /**
+         * 封装函数
+         * 值分别为
+         * 盒子 属性 值
+         * */
+        function changeCssStyle(obj, attr, value) {
+            obj.style[attr] = value;
+        }
+    }
+</script>
+</body>
+</html>

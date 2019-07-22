@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			.box {
+				position: relative;
+				width: 1200px;
+				height: 250px;
+				border: 1px solid #333;
+				margin: 200px auto;
+				overflow: hidden;
+
+			}
+
+			.box .img {
+				margin-top: 5px;
+				width: 3710px;
+				height: 230px;
+				position: absolute;
+				background: #F5F5DC;
+
+			}
+
+			.box .img li {
+				height: 100%;
+				width: 180px;
+				list-style: none;
+				float: left;
+				margin-left: 5px;
+
+			}
+
+			.box .img li :last-child {
+				margin-right: 10px;
+			}
+
+			.box .img li img {
+				width: 100%;
+				height: 100%;
+				border-radius: 5px;
+			}
+
+			.box .scroll {
+				width: 100%;
+				position: absolute;
+				height: 10px;
+				background: red;
+				bottom: 0;
+				cursor: move;
+			}
+
+			.box .scroll .bar {
+				/* width: 50px; */
+				height: 100%;
+				border-radius: 10px;
+				background: #333;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<!-- 图片区域 -->
+			<ul class="img">
+				<!-- <li><img src="./img/1.jpg" /></li> -->
+			</ul>
+			<!-- 滚动条 -->
+			<div class="scroll">
+				<div class="bar"></div>
+			</div>
+		</div>
+		<script>
+			window.onload = function() {
+				// 盒子
+				var box = document.getElementsByClassName("box")[0];
+				// 图片
+				var box_img = document.getElementsByClassName("img")[0];
+				// 滚动条盒子
+				var scroll = document.getElementsByClassName("scroll")[0];
+				// 滚动条
+				var bar = document.getElementsByClassName("bar")[0];
+				// console.log(box_img.offsetWidth)
+				// 动态设置滚动条的宽度
+				var barHeight = box.offsetWidth / box_img.offsetWidth * scroll.offsetWidth
+				bar.style.width = barHeight + "px";
+				// 动态添加图片
+				for (var i = 0; i < 20; i++) {
+					var li = document.createElement("li");
+					box_img.appendChild(li);
+					var img = document.createElement("img");
+					li.appendChild(img);
+					img.src = "./img/" + (i + 1) + ".jpg"
+				}
+				// 滚动条滚动
+				bar.onmousedown = function(e) {
+					var spaceX = e.clientX - bar.offsetLeft;
+					document.onmousemove = function(e) {
+						var x = e.clientX - spaceX;
+						x = x < 0 ? 0 : x;
+						x = x > scroll.offsetWidth - bar.offsetWidth ? scroll.offsetWidth - bar.offsetWidth : x;
+						bar.style.left = x + "px";
+						var moveX = x * (box_img.offsetWidth - box.offsetWidth) / (scroll.offsetWidth - bar.offsetWidth);
+						console.log(moveX);
+						// console.log(moveX);
+						box_img.style.marginLeft = -moveX + "px";
+						window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+					}
+				}
+				document.onmouseup = function() {
+					document.onmousemove = null;
+				}
+			}
+		</script>
+	</body>
+</html>

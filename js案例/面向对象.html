@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="main"></div>
+<script>
+    // function Dog(op) {
+    //     this._init(op);
+    // }
+    //
+    // Dog.prototype = {
+    //     //_init:操作属性
+    //     _init: function (option) {
+    //         this.name = option.name;
+    //         this.age = option.age;
+    //         this.dogFriends = option.dogFriends;
+    //     },
+    //     //    方法
+    //     eat: function (someThing) {
+    //         console.log(this.name + "吃" + someThing);
+    //     },
+    //     run: function (someWhere) {
+    //         console.log(this.name + "在" + someWhere);
+    //     }
+    //     //    实例化
+    //
+    // }
+    // var sDog = new Dog({name: '小花', age: 20});
+    // console.log(sDog);
+    // console.log(sDog.eat("水果"));
+    // var bigDog = new Dog({name: '旺财', age: 20, dogFriends: '嘉宝'})
+    // console.log(bigDog.eat('香蕉'));
+    // function Dog(option) {
+    //     this._init(option);
+    // }
+    //
+    // Dog.prototype = {
+    //     _init: function (option) {
+    //         this.name = option.name;
+    //         this.age = option.age;
+    //     },
+    //     eat: function () {
+    //         console.log(this.name + "在吃东西");
+    //     }
+    // }
+    // var small = new Dog({name: '旺财'});
+    // console.log(small.name);
+    // console.log(small.eat());
+
+    function Rect(option) {
+        this._init(option);
+    }
+
+    Rect.prototype = {
+        _init: function (option) {
+            option = option || {};
+            //    父级标签id
+            this.parentId = option.parentId;
+            this.left = option.left || 100;
+            this.top = option.top || 100;
+            //    自身的属性
+            this.width = option.width || 100;
+            this.height = option.height || 100;
+            this.backgroundColor = option.backgroundColor || 'blue';
+            this.border = option.border || 0;
+            this.borderRadius = option.borderRadius || 0;
+        },
+        //    绘制矩形
+        render: function () {
+            var parentNode = document.getElementById(this.parentId);
+            var childNode = document.createElement("div");
+            childNode.style.position = "absolute";
+            childNode.style.left = this.left + 'px';
+            childNode.style.top = this.top + 'px';
+            childNode.style.width = this.width + 'px';
+            childNode.style.height = this.height + 'px';
+            childNode.style.backgroundColor = this.backgroundColor;
+            childNode.style.border = this.border;
+            childNode.style.borderRadius = this.borderRadius + 'px';
+            parentNode.appendChild(childNode);
+        }
+    }
+    var rect = new Rect({
+        parentId: 'main',
+        left: 100,
+        top: 200,
+        width: 300,
+        height: 50,
+        backgroundColor: 'yellow',
+        border: "10px solid #000",
+        borderRadius: 30
+    });
+    rect.render();
+
+
+    //    闭包
+    function text() {
+        var age = 19;
+        return function () {
+            console.log(age);
+        }
+    }
+
+    // var fn = text();
+    // console.log(fn());
+    //封闭作用域
+
+    // (function () {
+    // })();
+    // ;(function () {
+    //
+    // })();
+    // +(function () {
+    //
+    // })();
+    // -(function () {
+    //
+    // })();
+    (function () {
+        // console.log(111);
+    })()
+    var num = 3;
+    (function () {
+        (function () {
+            (function () {
+                (function () {
+                    num = 5;
+                    (function () {
+                        console.log(num);
+                    })()
+                })()
+            })()
+        })()
+    })()
+</script>
+</body>
+</html>

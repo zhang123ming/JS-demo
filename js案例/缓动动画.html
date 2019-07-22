@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 90px;
+            height: 90px;
+            background: #00cc00;
+        }
+    </style>
+</head>
+<body>
+<button id="btn">开始动画</button>
+<div id="box"></div>
+<script>
+    window.onload = function () {
+        //定义变量
+        var timer = null, begin = 0, target = 800;
+
+        //开始动画
+        $("btn").onclick = function () {
+            //    清除定时器
+            clearInterval(timer);
+            //    设置定时器
+            timer = setInterval(function () {
+                begin += (target - begin) * 0.1;
+                if (Math.round(begin) >= target) {
+                    begin = target;
+                    clearInterval(timer);
+                }
+                $("box").style.marginLeft = begin + "px";
+            }, 100)
+        }
+
+        function $(id) {
+            return typeof id === "string" ? document.getElementById(id) : null;
+        }
+
+    }
+</script>
+</body>
+</html>

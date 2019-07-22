@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Title</title>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+
+			#box {
+				width: 200px;
+				height: 200px;
+				/* 	padding: 20px; */
+				background: #00cc00;
+				border: 10px solid #f0ad4e;
+				margin-top: 80px;
+				margin-left: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<p>盒子的宽高是200px</p>
+			<p>border 10px</p>
+			<!-- <p>padding：20px</p> -->
+			<p>marTop:80</p>
+			<p>marLeft:20</p>
+		</div>
+		<div style="height: 2000px;"></div>
+		<script>
+			var box = document.getElementById('box');
+			/**
+			 * 1;width height
+			 * */
+			// border+padding+内容的宽度和高度
+			console.log("clientHeight" + box.clientHeight + "====clientWidth " + box.clientWidth);
+			//padding+内容的宽度和高度
+			console.log("offsetheight" + box.offsetHeight + "  =====offsetWidth" + box.offsetWidth);
+			//能够滚动的内容的宽度和高度（假如盒子里面的内容超过盒子的高度或者宽度 则是以盒子里面的元素的高度或者宽度为标准）
+			console.log("scrollHeight" + box.scrollHeight + " =====scrollWidth" + box.scrollWidth);
+
+
+			/**
+			 * 2;top left
+			 * */
+
+			//clientLeft：左边边框的宽度 clientTop：上边边框的宽度
+			console.log("clientTop" + box.clientTop + "  =====clientTop " + box.clientLeft);
+			//当元素距离有定位的父盒子左边的距离；offsetTop：当前元素距离有定位的父盒子
+			console.log("offsetTop" + box.offsetTop + " =====offsetLeft " + box.offsetLeft);
+			//scroll:左边滚动的长度 scrollTop 上边滚动的长度
+			console.log("scrollTop" + box.scrollTop + "  =====scrollLeft" + box.scrollLeft);
+			console.log(document.documentElement.scrollTop);
+		</script>
+	</body>
+</html>

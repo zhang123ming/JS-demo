@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*
+        translateX:
+        traslateY:
+        translateZ:
+        思路：首先制作两个长方形 头部添加圆角 然后通过 旋转和位移调整位置
+    通过使用.heart .before 和.heart .after：减少dom操作 提高性能
+    部分代码：
+     */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url(2.jpg);
+            background-repeat: no-repeat;
+            background-size: 1366px 670px;
+        }
+
+        .heart {
+            /*position: relative;*/
+            /*width: 200px;*/
+            /*height: 200px;*/
+            /*margin: 50px auto;*/
+            /*background-color: #cc84b2;*/
+        }
+
+        .snowfall-flakes:before,
+        .snowfall-flakes:after {
+            /*激活伪元素的必要因素*/
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 10px;
+            height: 16px;
+            background: #c522ff;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .snowfall-flakes:before {
+            transform: rotate(-45deg);
+        }
+
+        .snowfall-flakes:after {
+            transform: translateX(4.2px) rotate(45deg);
+        }
+
+        body {
+            overflow-y: hidden;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="heart">
+</div>
+<script src="jquery-2.1.1.min.js"></script>
+<script src="snowfall.jquery.js"></script>
+<script>
+    $(function () {
+        $(document).snowfall({flakeCount: 20, maxSpeed: 0.5});
+    })
+</script>
+</body>
+</html>

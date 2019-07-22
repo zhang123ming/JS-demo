@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	<style type="text/css">
+		*{
+			margin: 0;padding: 0;
+		}
+	</style>
+</head>
+<body>
+<div style="height: 200px;width: 20px;background: #00cc00"></div>
+<button id="btn">点我</button>
+<script>
+    document.onclick = function (event) {
+        var e = event || window.event;
+        // alert(e.screenX + "," + e.screenY);
+        //取值范围仅为可视页面
+        document.write(e.screenX + ',' + e.screenY + "......");
+        //区域为document 取值范围为整个页面
+        // document.write(e.pageX + ',' + e.pageY);
+        alert(e.pageX + ',' + e.pageY);
+    };
+
+
+    var btn = document.getElementById("btn");
+    btn.onclick = function (event) {
+        var e = event || window.event;
+        //检测事件内型
+        // console.log(e.type);
+        // console.log(e.target);
+        // console.log(e.screenX);
+        // console.log(e.pageY);
+    }
+    btn.onmouseover = function (event) {
+        var e = event || window.event;
+        //检测事件类型
+        // console.log(e.type);
+        // console.log(e.target);
+    }
+</script>
+</body>
+</html>

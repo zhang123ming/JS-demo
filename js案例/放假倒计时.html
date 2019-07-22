@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #time {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bolder;
+            color: orangered;
+        }
+    </style>
+</head>
+<body>
+<div id="time"></div>
+<script>
+    window.onload = function () {
+        //自定义现在时间
+        var nextDate = new Date("2019/08/08 08:08:08");
+        //获取标签
+        var time = document.getElementById("time");
+        setInterval(function () {
+            var currentDate = new Date();
+//获取时间戳
+            var currentTime = currentDate.getTime();
+            var nextTime = nextDate.getTime();
+
+            //    剩下的时间戳
+            var allTime = nextTime - currentTime;
+
+            //转化时间
+            var allSecond = size(parseInt(allTime / 1000));//秒
+            var d = size(parseInt(allSecond / 3600 / 24));//天
+            var h = size(parseInt(allSecond / 3600 % 24));//小时
+            var m = size(parseInt(allSecond / 60 % 60));//分钟
+            var s = size(parseInt(allSecond % 60));//秒
+            time.innerText = "距离放假还有" + d + "天" + h + "小时" + m + "分钟" + s + "秒"
+
+        }, 1000);
+
+        function size(num) {
+            return num > 10 ? num : '0' + num;
+        }
+    }
+</script>
+</body>
+</html>

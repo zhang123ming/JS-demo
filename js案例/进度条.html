@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				background: darkmagenta;
+			}
+
+			ul {
+				width: 600px;
+				height: 20px;
+				background: #006600;
+				margin: 200px auto;
+			}
+
+			li {
+				float: left;
+				background: #0062CC;
+				width: 0px;
+				height: 100%;
+				list-style: none;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body id="body">
+		<ul class="ul">
+			<li></li>
+		</ul>
+		<script>
+			var ul = document.getElementsByClassName("ul")[0]
+			var li = ul.children[0];
+			jinDuTiao(li, 6);
+			
+			function jinDuTiao(li, w) {
+				var num = 0;
+				var timer = setInterval(function() {
+					num++;
+					li.innerHTML = num + "%";
+					if (num === 100) {
+						clearInterval(timer)
+					}
+					li.style.width = num * w + "px"
+					li.style.background = "#" + Math.random().toString(16).slice(2, 8);
+					console.log(num + "=======" + Math.random().toString(16).slice(2, 8).toUpperCase());
+					body.style.background="#"+ Math.random().toString(16).slice(2, 8)
+				}, 100)
+			}
+		</script>
+	</body>
+</html>

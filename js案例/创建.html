@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<button type="button" class="btn">点击按钮获取数据</button>
+		<ul class="ul">
+
+		</ul>
+		<script>
+			window.onload = function() {
+				// 获取json数据
+
+				var btn = document.getElementsByClassName("btn")[0];
+				var ul = document.getElementsByClassName("ul")[0];
+				btn.onclick = function() {
+					var ajax = new XMLHttpRequest();
+					ajax.open('get', "icon.json");
+					ajax.onreadystatechange = function() {
+						if (ajax.readyState === 4 && ajax.status === 200) {
+							var data = ajax.responseText;
+							data = JSON.parse(data)
+							console.log(data.info[0].name);
+							// console.log(data.info.length)
+							for (var i = 0; i < data.info.length; i++) {
+								var li = document.createElement("li");
+								var a = document.createElement("a");
+								var img = document.createElement("img");
+								ul.appendChild(li);
+								a.href =data.info[i].url
+								li.appendChild(a);
+								a.innerHTML = data.info[i].name;
+								a.appendChild(img);
+								img.src = data.info[i].url;
+
+
+							}
+
+						}
+					}
+					ajax.send();
+				}
+
+
+
+
+
+
+				// 				var liText = ["第一个li", "第二个li", "第三个li", "第四个li", "第五个li"];
+				// 				console.log(liText.length);
+				// 				var ul = document.getElementsByClassName("ul")[0];
+				// 
+				// 				for (var i = 0; i < liText.length; i++) {
+				// 					// li = liText[i];
+				// 					// console.log(liText[i])
+				// 					// li.innerHTML+=liText[i];
+				// 					var li = document.createElement("li");
+				// 					li.innerHTML += liText[i];
+				// ul.insertBefore(li, ul.children[0]);
+				// ul.appendChild(li);
+
+			}
+		</script>
+	</body>
+</html>

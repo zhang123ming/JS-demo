@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0.3);
+			}
+
+			li {
+				list-style: none;
+			}
+
+			.nav {
+				width: 100%;
+				height: 60px;
+				background: #FDF5E6;
+				border-radius: 10px;
+				position: relative;
+				margin-top: 100px;
+			}
+
+			.nav .box-ul {
+				width: 600px;
+				height: 60px;
+				background: red;
+				margin: 0 auto;
+			}
+
+
+
+			.nav .box-ul span {
+				position: absolute;
+				width: 100px;
+				height: 5px;
+				background: orange;
+				top: 60px;
+
+			}
+
+			.nav .box-ul li {
+				text-align: center;
+				float: left;
+				width: 100px;
+				height: 100%;
+				line-height: 60px;
+				/* background: #006600; */
+			}
+
+			.nav .box-ul li a {
+				color: #333;
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="nav">
+			<ul class="box-ul">
+				<span id="navBottom"></span>
+				<li><a href="#">首页</a></li>
+				<li><a href="#">案例展示</a></li>
+				<li><a href="#">新闻资讯</a></li>
+				<li><a href="#">关于我们</a></li>
+				<li><a href="#">师资团队</a></li>
+				<li><a href="#">留言板</a></li>
+			</ul>
+		</div>
+		<script>
+			window.onload = function() {
+				//匀速动画
+				function animate(element, target) {
+					//清理定时器
+					clearInterval(element.timeId);
+					element.timeId = setInterval(function() {
+						//获取元素的当前位置
+						var current = element.offsetLeft;
+						//移动的步数
+						var step = (target - current) / 10;
+						step = step > 0 ? Math.ceil(step) : Math.floor(step);
+						current += step;
+						element.style.left = current + "px";
+						if (current == target) {
+							//清理定时器
+							clearInterval(element.timeId);
+						}
+						//测试代码:
+						console.log("目标位置:" + target + ",当前位置:" + current + ",每次移动步数:" + step);
+					}, 20);
+				}
+
+
+				// 获取所有的li
+				var box = document.getElementsByClassName("box-ul")[0];
+				var list = box.getElementsByTagName("li");
+				// 获取span
+				spanbottom = document.getElementById("navBottom");
+				// console.log(list.length);
+				for (var i = 0; i < list.length; i++) {
+					// 鼠标进入
+					list[i].onmouseover = function() {
+						animate(spanbottom, this.offsetLeft)
+					}
+					var lastClick = 0;
+					// 鼠标点击
+					list[i].onclick = function() {
+						lastClick = this.offsetLeft;
+					}
+					// 鼠标离开
+					list[i].onmouseout = function() {
+						animate(spanbottom, lastClick);
+					}
+				}
+
+			}
+		</script>
+	</body>
+</html>

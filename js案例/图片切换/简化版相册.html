@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            margin: 50px 300px;
+        }
+
+        li {
+            list-style: none;
+            float: left;
+            margin-left: 10px;
+        }
+
+        li:nth-child(1) {
+            margin-left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <!--大图片描述-->
+    <p id="des">美女1</p>
+    <!--大图展示-->
+    <img id="big_img" src="../../i1.jpg" width="630px;">
+    <!--小图列表-->
+    <ul id="fi">
+        <li>
+            <a href="../../i1.jpg" title="美女1">
+                <img src="../../i1.jpg" width="150px">
+            </a>
+        </li>
+        <li><a href="../../i2.jpg" title="美女2">
+            <img src="../../i2.jpg" width="150px">
+        </a></li>
+        <li>
+            <a href="../../i3.jpg" width="150px" title="美女3">
+                <img src="../../i3.jpg" width="150px">
+            </a></li>
+        <li><a href="../../i4.jpg" title="美女4">
+            <img src="../../i4.jpg" width="150px">
+        </a></li>
+    </ul>
+</div>
+<script>
+    window.onload = function () {
+        //1、分别获取需要的标签
+        var ul = document.getElementById("fi");
+        //拿到ul下面的a标签
+        var aList = ul.getElementsByTagName("a");
+        // console.log(aList);
+        var des = document.getElementById("des");
+        var big_img = document.getElementById("big_img");
+
+        //绑定事件
+        for (var i = 0; i < aList.length; i++) {
+            //
+            aList[i].onclick = function () {
+                // alert(121);
+                // console.log(this.href);
+                //console.log(this.title);
+                big_img.src = this.href;
+                des.innerHTML = this.title;
+                return false;//可以避免跳转
+            }
+        }
+    }
+</script>
+</body>
+</html>

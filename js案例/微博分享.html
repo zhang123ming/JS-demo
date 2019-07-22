@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #word {
+            width: 300px;
+            height: 300px;
+            margin: 100px auto;
+            border: 1px solid #ccc;
+        }
+
+        #share_text {
+            background: deepskyblue;
+            width: 150px;
+            color: orange;
+            position: absolute;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<!--https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1553949724&di=ac93945c02f767f4a7cef80020f59863&src=http://pic.baike.soso.com/p/20131204/20131204114917-774835459.jpg-->
+
+<p id="word">
+    《指定管理人规定》第四条第二款、第十五条第一款明确规定，人民法院在编制管理人名册时不接受异地申请，且受案人民法院指定管理人时以从本地管理人名册中指定为原则。上述规定饱受理论界和实务界诟病，被认为歧视外地中介机构、具有严重的地方保护主义色彩，限制了市场化破产先行地区已具有丰富实战经验的异地优质管理人跨区域执业，阻碍了社会资源的跨区域调动和整合。</p>
+<div id="share_text">第四条第二款、第十五条第一款明确规定</div>
+<script src="myScroll.js"></script>
+<script>
+    window.onload = function () {
+//        监听鼠标的抬起
+        $('word').onmouseup = function () {
+            //处理兼容问题
+            var e = event || window.event;
+
+
+            //    获取选中的文字
+            var selectdText;
+            if (window.getSelection) {//标准模式 获取选中文字
+                selectdText = window.getSelection().toString();
+            } else {//IE系列
+                selectdText = document.selection.createRange().text;
+                ;
+
+            }
+            // console.log(selectdText);//测试选中文字
+            //显示面板
+            if (selectdText !== null) {
+                $("share_text").innerText = selectdText;
+                $("share_text").style.display = "block";
+                //改变位置
+                $("share_text").style.left = e.clientX + 'px';
+                $("share_text").style.top = e.clientY + 'px';
+
+            }
+        };
+
+        //    监听文档的点击
+        document.onmousedown = function (event) {
+            //兼容
+            var e = event || window.event;
+            //获取点击区域id
+            var targetId = e.target ? e.target.id : e.srcElement.id;
+            //    判断
+            if (targetId !== 'share_text') {
+                $('share_text').style.display = 'none';
+            }
+            window.getSelection ? window.getSelection().removeRange() : document.selection.empty();
+        }
+    }
+</script>
+</body>
+</html>

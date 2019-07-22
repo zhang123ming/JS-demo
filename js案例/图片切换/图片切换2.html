@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+
+        #box {
+            border: 1px solid #71cc4d;
+            width: 200px;
+            height: 50px;
+            padding-top: 200px;
+            margin: 100px auto;
+            background: url("s1.jpg");
+            background-size: 200px 200px;
+        }
+
+        .ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul class="ul">
+        <li class="li-01"><img src="s11.jpg"></li>
+        <li class="li-02"><img src="s22.jpg"></li>
+        <li class="li-03"><img src="s33.jpg"></li>
+        <li class="li-04"><img src="s77.jpg"></li>
+    </ul>
+</div>
+<script>
+    window.onload = function () {
+        //获取需要的标签
+        var li01 = document.getElementsByClassName("li-01")[0];
+        var li02 = document.getElementsByClassName("li-02")[0];
+        var li03 = document.getElementsByClassName("li-03")[0];
+        var li04 = document.getElementsByClassName("li-04")[0];
+        var box = document.getElementById("box");
+        // 2\监听
+        li01.onmouseover = function () {
+            box.style.background = " url('s1.jpg') no-repeat";
+            box.style.backgroundSize = "200px 200px";
+        }
+        li02.onmouseover = function () {
+            box.style.background = " url('s2.jpg') no-repeat";
+            box.style.backgroundSize = "200px 200px";
+        }
+        li03.onmouseover = function () {
+            box.style.background = " url('s3.jpg') no-repeat";
+            box.style.backgroundSize = "200px 200px";
+        }
+        li04.onmouseover = function () {
+            box.style.background = " url('s7.jpg') no-repeat";
+            box.style.backgroundSize = "200px 200px";
+        }
+    }
+</script>
+</body>
+</html>

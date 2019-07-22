@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            height: 3000px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    /*** 处理scroll家族浏览器适配问题兼容写法
+     *var scrollTop=window.pageYOffset||document.documentElement.scrollTop||document.body.scrollTop;
+     *var scrollLeft=window.pageXOffset||document.documentElement.scrollLeft||document.body.scrollLeft;
+     *
+     * ie9+和最新浏览器：window.pageYOffset window.pageXOffset
+     */
+
+
+
+
+
+
+    // document.documentElement.scrollTo==window.pageYOffset
+    // window.onscroll = function () {
+    //     //不支持IE8以下
+    //     if (document.documentElement.scrollTop > 1000) {
+    //         alert(1);
+    //     }
+    // if (window.pageYOffset > 1000) {
+    //     alert(1);
+    // }
+    // console.log(document.documentElement.scrollTop, document.documentElement.scrollLeft);
+    // }
+
+
+    //    json封装scroll
+    /**
+     * 获取滚动的头部距离和左边的距离
+     *scroll().top scroll().left
+     *
+     * */
+    function scroll() {
+        if (window.pageYOffset !== null) {
+            return {
+                top: window.pageYOffset,
+                left: window.pageXOffset,
+            }
+        } else if (document.compatMode === "CSS1Compat") {
+            //严格模式
+            return {
+                top: document.documentElement.scrollLeft,
+                left: document.documentElement.scrollLeft,
+            }
+        }
+        //怪异模式
+        return {
+            top: document.body.scrollTop,
+            left: document.body.scrollLeft,
+        }
+    }
+
+    window.onscroll = function () {
+        if (scroll().top > 1000) {
+            alert(12);
+        }
+    }
+</script>
+</body>
+</html>

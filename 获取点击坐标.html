@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .heart {
+            position: relative;
+            margin-left: 20px;
+            height: 50px;
+            width: 50px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .heart .left, .heart .right {
+            position: absolute;
+            height: 32px;
+            width: 20px;
+            background-color: red;
+            box-shadow: 1px 1px 1px #9083cc;
+            border-radius: 10px 10px 0px 0px;
+
+        }
+
+        .heart .left {
+            transform: rotate(-45deg);
+
+        }
+
+        .heart .right {
+            transform: translateX(8.4px) rotate(45deg);
+
+        }
+    </style>
+</head>
+<body>
+<div class="heart">
+    <div class="left ani"></div>
+    <div class="right"></div>
+</div>
+<script src="jquery-2.1.1.min.js"></script>
+<script>
+    $(function () {
+        var x = 0 + "px";
+        var y = 0 + "px";
+        var heart = $(".heart");
+
+        function run() {
+            y = y - 30;//点击后往上移动的距离
+            heart.animate({
+                marginLeft: x,
+                marginTop: y,
+                opacity: 0.6,
+            }).fadeOut(0);//设置延迟 添加效果
+        };
+        document.onclick = function (ev) {
+            var oEvent = ev || event;
+            x = oEvent.screenX - 5;//点击屏幕获取x轴
+            y = oEvent.screenY - 95;//点击屏幕获取y轴
+            heart.animate({marginLeft: x, marginTop: y}).fadeIn(0);
+            setTimeout(run, 0);
+            heart.css("opacity", "1");
+        }
+    })
+</script>
+</body>
+</html>

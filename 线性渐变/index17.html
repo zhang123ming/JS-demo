@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+    /*首先在外围画一个200px的大圆设置其背景颜色，然后在大圆内画一个小圆设置背景颜色为白色*/
+    .demo1 {
+        width: 200px;
+        height: 200px;
+        /*border: 10px solid;*/
+        /* border-image: -webkit-linear-gradient( red, blue) 30 30;
+        border-image: -moz-linear-gradient( red, blue) 30 30;
+        border-image: linear-gradient( red, blue) 30 30; */
+        background: -webkit-linear-gradient(0deg, red, blue, #00cc00, #cc00ff, #003eff, #00ff00);
+        /*background-image: -webkit-repeating-linear-gradient(left, #333 5%, #ccc 10%);*/
+        /* background-image: -o-repeating-linear-gradient(left, #333 5%, #ccc 10%);
+        background-image: repeating-linear-gradient(to right, #333 5%, #ccc 10%); */
+        border-radius: 115px;
+        border: 1px solid #fff;
+    }
+
+    .demo2 {
+        width: 190px;
+        height: 190px;
+        background-color: #fff;
+        border-radius: 100px;
+        margin: 0 auto;
+        margin-top: 5px;
+    }
+
+
+
+</style>
+<body>
+<div class="demo1">
+    <div class="demo2"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            background: orangered;
+            position: absolute;
+        }
+
+
+    </style>
+</head>
+<body>
+<button id="btn">往右走</button>
+<button id="btnR">往左走</button>
+<div id="box"></div>
+<script src="../myScroll.js"></script>
+<script>
+    window.onload = function () {
+        //监听按钮点击
+        var timer = null;
+        // var target = 800;//运动的距离距离
+        var box = $('box');//得到盒子的
+        $('btn').onclick = function () {
+            buffer(box, {"left": 400, "top": 400, "width": 300},
+                function () {
+                    buffer(box, {'top': 100, 'width': 50, 'height': 50}, function () {
+                        buffer(box, {'top': 200, 'width': 150, 'height': 300, "backgroundColor": 'yellow'});
+                    });
+                });
+        };
+        $('btnR').onclick = function () {
+            buffer(box, {'top': 100, 'width': 50, 'height': 50});
+        };
+
+        /**
+         * 函数封装
+         * 参数分别为 box，属性，目标长度
+         * */
+        function buffer(obj, json, fn) {
+            clearInterval(obj.timer);
+            var begin = 0;
+            var target = 0;
+            var speed = 0;
+            obj.timer = setInterval(function () {
+                //旗帜
+                var flag = true;
+                for (var key in json) {
+                    //获取初始值
+                    begin = parseInt(getCssAttrValue(obj, key)) || 0;
+                    target = parseInt(json[key]);
+                    //求出步长
+                    speed = (target - begin) * 0.2;
+                    //向上取整
+                    //判断是向左还是向右运动
+                    speed = (target > begin) ? Math.ceil(speed) : Math.floor(speed);
+                    //    盒子动起来
+                    obj.style[key] = begin + speed + 'px';
+                    box.innerHTML = obj.style[key];
+                    //判断
+                    if (begin !== target) {
+                        flag = false;
+                    }
+                }
+                //    清除定时器
+                if (flag) {
+                    clearInterval(obj.timer);
+                    console.log(fn);
+                    //    判断有没有回调函数
+                    if (fn) {
+                        fn();
+                    }
+                    ;
+
+                }
+            }, 20)
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .div {
+            width: 280px;
+            height: 200px;
+            border: 1px solid #AEAEAE;
+            position: absolute;
+            left: 50%;
+            margin-left: -200px;
+            margin-top: 50px;
+        }
+
+        .div .ul .li {
+            float: left;
+            width: 70px;
+            height: 35px;
+            font-size: 14px;
+            text-align: center;
+            line-height: 35px;
+            background-color: #d9edf7;
+            cursor: pointer;
+        }
+
+        .div .ul .size {
+            background-color: white;
+        }
+
+        .num {
+            margin-top: 40px;
+        }
+
+        .num li {
+            position: absolute;
+            display: none;
+
+        }
+
+        .num1 {
+            display: block;
+        }
+    </style>
+    <script src="jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".num li").eq(0).addClass("active");
+            //通过下标获取加载页面时显示第一个.num li
+            $(".num li").eq(0).show();
+            // 鼠标移入改变其颜色
+            $(".div .ul li").mouseover(function () {
+                var index = $(this).index();
+                i = index;
+                $(this).addClass("size").siblings().removeClass("size");
+                $(".num li").eq(index).fadeIn().siblings().fadeOut();
+            });
+            var t = setInterval(move, 1000);
+            var i = 0;
+
+            //循环播放
+            function move() {
+                i++;
+                if (i == 4) {
+                    i = 0;
+                }
+                $(".div .ul li").eq(i).addClass("size").siblings().removeClass("size");
+                //通过以下语句可以让其自动获取。num li
+                $(".num li").eq(i).fadeIn().siblings().fadeOut();
+
+            }
+
+            // 鼠标移入移出效果
+            $(".div .ul .li").hover(function () {
+                clearInterval(t);
+            }, function f() {
+                t = setInterval(move, 1000);
+            });
+
+        })
+    </script>
+</head>
+<body>
+<div class="div">
+    <ul class="ul">
+        <li class="li size">公告</li>
+        <li class="li">论坛</li>
+        <li class="li">消息</li>
+        <li class="li">信息</li>
+    </ul>
+    <ul class="num">
+        <li>菜单1</li>
+        <li>菜单2</li>
+        <li>菜单3</li>
+        <li>菜单4</li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-size: 20px;
+        }
+
+        #codeBox {
+            width: 200px;
+            height: 50px;
+            margin: 20px auto;
+            border: 1px solid green;
+            line-height: 50px;
+            text-align: center;
+            letter-spacing: 5px;
+        / / cursor: pointer;
+            -webit-user-select: none;
+        }
+    </style>
+</head>
+<body>
+<div id="codeBox">AD3F</div>
+<script>
+    var codeBox = document.getElementById('codeBox');
+    //方案1
+    //生成四位随机验证码：取值范围
+    //     var areaStr = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    //     var result = '';
+    //     for (var i = 0; i < 4; i++) {
+    // //随机获取0-61之间的整数  作为接下来获取字符串的索引
+    //         //根据索引获取随机字符
+    //         var ran = Math.round(Math.random() * 61);//获取0-61之间的随机数
+    //         var char = areaStr.charAt(ran);
+    //         //把每次循环的字符串放到最后的结果中
+    //         result += char;
+    //     }
+    //     codeBox.innerHTML = result;
+
+
+    //方案二：
+    // function queryCode() {
+    //     var areaStr = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    //     var result = '';
+    //     for (var i = 0; i < 4; i++) {
+    //         var ran = Math.round(Math.random() * 61);//获取随机下标
+    //         result += areaStr[ran];//通过下标找到相应的字符串
+    //     }
+    //     codeBox.innerHTML = result;
+    // }
+    //
+    // queryCode();//页面加载调用此方法
+    // //点击盒子重新生成验证码
+    // codeBox.onclick = queryCode;
+    //方案三
+    //要求生成四位不重复的验证码
+    // function queryCode() {
+    //     var areaStr = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    //     var result = '';
+    //     for (var i = 0; i < 4; i++) {
+    //         var ran = Math.round(Math.random() * 61);//获取随机下标
+    //         char = areaStr[ran];
+    //         //验证一下获取的char字符是否已经在result中存在 如果存在则不存储
+    //         //重新获取一遍  反之才累加到result当中
+    //         if (result.indexOf(char) > -1) {
+    //             i--;
+    //             continue;
+    //         }
+    //         result += char;
+    //     }
+    //     codeBox.innerHTML = result;
+    // }
+    //
+    // queryCode();//页面加载调用此方法
+    // //点击盒子重新生成验证码
+    // codeBox.onclick = queryCode;
+    //方案4
+    //要求字符串中不能存在大小写相同的字符
+    function queryCode() {
+        var areaStr = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var result = '';
+        for (var i = 0; i < 4; i++) {
+            var ran = Math.round(Math.random() * 61);//获取随机下标
+            char = areaStr[ran];
+
+            //验证一下获取的char字符是否已经在result中存在 如果存在则不存储
+            //重新获取一遍  反之才累加到result当中
+            //if (result.indexOf(char) > -1) {
+            if (result.toLowerCase().indexOf(char.toLowerCase()) > -1) {
+                i--;
+                continue;
+            }
+            result += char;
+        }
+        codeBox.innerHTML = result;
+    }
+
+    queryCode();//页面加载调用此方法
+    //点击盒子重新生成验证码
+    codeBox.onclick = queryCode;
+</script>
+</body>
+</html>

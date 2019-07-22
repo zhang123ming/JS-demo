@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .tip{
+            position: absolute;
+            padding: 0px 14px;
+            height: 35px;
+            line-height: 35px;
+            background: #2DCB70;
+            color: #fff;
+            top: 160px;
+            font-size: 16px;
+            font-weight: normal;
+            text-transform: none;
+            margin: 0 auto;
+            border-radius: 3px;
+
+        }
+        .tip .top{
+               position: absolute;
+               width: 0;
+               height: 0;
+               overflow: hidden;
+               border: 7px solid transparent;
+               /*三角向上或者向下*/
+            border-top-color: #2DCB70;
+               left: 50%;
+               /*盒子位置*/
+               margin-left: -3px;
+               bottom: -14px;
+           }
+
+        .tip .bottom{
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        border: 7px solid transparent;
+        /*!*三角向上或者向下*/
+        /*!*right left*!*/
+        border-top-color:red;
+        left: 50%;
+        /*盒子位置*/
+        margin-left: -3px;
+        bottom: 1px;
+        }
+        .tip .top:hover{
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            border: 7px solid transparent;
+            /*三角向上或者向下*/
+            border-bottom-color: #2DCB70;
+            left: 50%;
+            /*盒子位置*/
+            margin-left: -3px;
+            bottom: -14px;
+        }
+    </style>
+</head>
+<body>
+<div class="tip">
+    <span class="bottom"></span>
+    <em>Hello World</em>
+    <span class="top"></span>
+
+</div>
+</body>
+</html>

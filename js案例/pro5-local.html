@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			body,
+			html {
+				width: 100%;
+				height: 100%;
+			}
+
+			.box {
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.1);
+				position: relative;
+
+			}
+
+			.box i {
+				position: absolute;
+				background: #008B8B;
+				width: 50px;
+				height: 50px;
+				font-size: 30px;
+				font-weight: bolder;
+				color: #F5F5DC;
+				border-radius: 50%;
+				text-align: center;
+				line-height: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<img src="//pinduoduoimg.yangkeduo.com/app/lego/dynamic_view/fresh_user_hongbao_word.png@1300w_1l_80Q" alt="">
+			<i class="close">X</i>
+		</div>
+		<script>
+			window.onload = function() {
+				function loca() {
+					var box = document.getElementsByClassName("box")[0];
+					var close = document.getElementsByClassName("close")[0];
+					if (localStorage.getItem('isClose')) {
+						box.style.display = "none"
+					} else {
+						box.style.display = "block"
+					}
+					close.onclick = function() {
+						box.style.display = "none";
+						localStorage.setItem('isClose', "1");
+					}
+				}
+				loca();
+			}
+		</script>
+	</body>
+</html>

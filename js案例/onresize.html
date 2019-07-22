@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background: #3c3136;
+        }
+    </style>
+</head>
+<body>
+<script src="myScroll.js"></script>
+<script>
+    window.onload = function () {
+        /**
+         * 例题：
+         * 当屏幕的宽度>960时，页面背景颜色为红色
+         * 当屏幕的宽度>640时 页面的背景颜色为蓝色
+         * 当屏幕的宽度<640时 页面的背景颜色为绿色
+         * */
+
+        window.onresize = changerColor;
+
+        /**
+         * 封住函数
+         * */
+        function changerColor() {
+            //获取屏幕的宽度
+            var clientW = document.body.clientWidth;
+            if (clientW >= 960) {
+                document.body.style.background = "red";
+            } else if (clientW >= 640) {
+                document.body.style.background = "blue";
+            } else {
+                document.body.style.background = "green";
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

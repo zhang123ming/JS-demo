@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        #begin, #end {
+            margin-top: 20px;
+        }
+
+        #name {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<button id="begin">开始点名</button>
+<button id="end">结束点名</button>
+<div id="name">张三</div>
+<div id="name2"></div>
+<script>
+    window.onload = function () {
+        //    获取标签
+        var begin = document.getElementById("begin");
+        var end = document.getElementById("end");
+        var name = document.getElementById("name");
+        var name2 = document.getElementById("name2");
+        var timer = null;
+        //    定义变量
+        var nameArr = ['张三', '李四', '王二', '赵丽', '旺旺', '王超', '周杰伦', '王五', '范跑跑']
+        name.innerText = nameArr[1];
+        //    监听事件
+        begin.onclick = function () {
+            //清除定时器
+            clearInterval(timer);
+            //    设置定时器
+            timer = setInterval(function () {
+                var suiji = parseInt(Math.random() * nameArr.length);
+                var s_name = nameArr[suiji];
+                name.innerText = s_name;
+            }, 50)
+        };
+        end.onclick = function () {
+            clearInterval(timer);
+
+
+        }
+    }
+</script>
+</body>
+</html>

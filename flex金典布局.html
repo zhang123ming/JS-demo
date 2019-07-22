@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;padding: 0;
+			}
+			html,body{
+				width: 100%;
+				height: 100%;
+			}
+			.header{
+				height: 80px;
+				text-align: center;
+				line-height: 80px;
+				font-size: 30px;
+				font-weight: bold;
+				background: lightblue;
+			}
+			.content{
+				width: 100%;
+				height: 500px;
+				display: flex;
+				text-align: center;
+				line-height: 500px;
+				font-size: 30px;
+				color: #FF0000;
+				
+			}
+			.left{
+				flex: 2;
+				background: lawngreen;
+			}
+			.center{
+				flex: 6;
+				background: darkmagenta;
+			}
+			.right{
+				flex: 2;
+			background: darkorange;
+			}
+			.footer{
+				width: 100%;
+				height: 80px;
+				text-align: center;
+				line-height: 80px;
+				background: #F0AD4E;
+				font-size: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">这是头部</div>
+		<div class="content">
+			<div class="left">这是左边</div>
+			<div class="center">这是中间内容</div>
+			<div class="right">这是右边</div>
+		</div>
+		<div class="footer">这是底部</div>
+	</body>
+</html>
