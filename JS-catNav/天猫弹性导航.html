@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        body {
+            background: pink;
+        }
+
+        #nav {
+            width: 1100px;
+            height: 63px;
+            background: url("c15ee2db4548415696ab8612c80128ac.gif") no-repeat right center #fff;
+            border-radius: 5px;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        #nav ul {
+            position: relative;
+        }
+
+        #nav ul li {
+            line-height: 63px;
+            float: left;
+            width: 88px;
+            height: 63px;
+            color: #f3f3f3;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #t_mall {
+            width: 88px;
+            height: 63px;
+           background:blue;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<nav id="nav">
+    <span id="t_mall"></span>
+    <ul>
+        <li><a href="#">双11狂欢</a></li>
+        <li><a href="#">服装会场</a></li>
+        <li><a href="#">数码家电</a></li>
+        <li><a href="#">家具建材</a></li>
+        <li><a href="#">母婴会场</a></li>
+        <li><a href="#">手机会场</a></li>
+        <li><a href="#">美妆会场</a></li>
+        <li><a href="#">进口会场</a></li>
+        <li><a href="#">飞猪旅行</a></li>
+    </ul>
+</nav>
+
+<script>
+    window.onload = function () {
+        //获取需要的标签
+        var nav = $('nav');
+        //拿到nav下的第一个子元素
+        var mall = nav.children[0];
+        //得到ul
+        var ul = nav.children[1];
+        //拿到所有的li
+        var allLi = ul.children;
+        //记录鼠标点击位置
+        var beginY = 0;
+        //遍历
+        for (var i = 0; i < allLi.length; i++) {
+            var li = allLi[i];
+            //    监听鼠标进入事件
+            li.onmouseover = function () {
+                end = this.offsetLeft;
+
+            };
+            //    监听鼠标按下事件
+            li.onmousedown = function () {
+                beginY = this.offsetLeft;
+            };
+            //    监听鼠标离开事件
+            li.onmouseout = function () {
+                end = beginY;
+            };
+        }
+
+        //缓动动画
+        var begin = 0, end = 0;
+        setInterval(function () {
+            begin = begin + (end - begin) * 0.2;
+            mall.style.left = begin + 'px';
+
+        }, 10)
+
+        function $(id) {
+            return typeof id === "string" ? document.getElementById(id) : null;
+        }
+    }
+</script>
+</body>
+</html>
